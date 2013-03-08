@@ -1,0 +1,38 @@
+import org.newdawn.slick.*;
+
+public class vhat extends BasicGame{
+
+	public vhat(){
+		super("vhat");
+	}
+
+	
+	@Override
+	public void init(GameContainer gc) throws SlickException {
+		
+	}
+
+	
+	@Override
+	public void render(GameContainer gc, Graphics g) throws SlickException {
+		
+	}
+
+
+	@Override
+	public void update(GameContainer gc, int delta) throws SlickException {
+		Input input = gc.getInput();
+		
+	}
+
+	
+	public static void main(String[] args) throws SlickException{
+		AppGameContainer app = new AppGameContainer(new vhat());
+		AppGameContainer thing = new AppGameContainer(new vhat());
+		app.setDisplayMode(800, 600, false);
+		thing.setDisplayMode(100, 100, false);
+		thing.start();
+		app.start();
+	}
+
+}

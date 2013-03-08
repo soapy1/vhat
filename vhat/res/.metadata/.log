@@ -1,0 +1,230 @@
+!SESSION 2013-02-28 08:08:32.521 -----------------------------------------------
+eclipse.buildId=I20120502-2000
+java.version=1.7.0_15
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86, WS=gtk, NL=en_CA
+Command-line arguments:  -os linux -ws gtk -arch x86
+
+!ENTRY org.eclipse.ui 4 4 2013-02-28 08:09:14.470
+!MESSAGE Could not create view: 'org.eclipse.ui.internal.introview'.
+
+!ENTRY org.eclipse.ui 4 0 2013-02-28 08:09:23.644
+!MESSAGE Problems occurred restoring workbench.
+!SUBENTRY 1 unknown 0 0 2013-02-28 08:09:23.644
+!MESSAGE OK
+!SUBENTRY 1 unknown 0 0 2013-02-28 08:09:23.644
+!MESSAGE OK
+!SUBENTRY 1 unknown 0 0 2013-02-28 08:09:23.644
+!MESSAGE OK
+!SUBENTRY 1 unknown 0 0 2013-02-28 08:09:23.644
+!MESSAGE OK
+!SUBENTRY 1 org.eclipse.ui 4 0 2013-02-28 08:09:23.644
+!MESSAGE Unable to restore perspective: Workspace - Java.
+!SUBENTRY 2 org.eclipse.ui 0 0 2013-02-28 08:09:23.645
+!MESSAGE Problems occurred restoring perspective.
+!SUBENTRY 3 org.eclipse.ui 0 0 2013-02-28 08:09:23.645
+!MESSAGE 
+!SUBENTRY 2 unknown 0 0 2013-02-28 08:09:23.645
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2013-02-28 08:09:23.645
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2013-02-28 08:09:23.645
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2013-02-28 08:09:23.645
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2013-02-28 08:09:23.646
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2013-02-28 08:09:23.646
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2013-02-28 08:09:23.646
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2013-02-28 08:09:23.646
+!MESSAGE OK
+!SUBENTRY 2 org.eclipse.ui 4 0 2013-02-28 08:09:23.646
+!MESSAGE Could not find view: org.eclipse.ui.internal.introview
+!SUBENTRY 1 unknown 0 0 2013-02-28 08:09:23.646
+!MESSAGE OK
+!SESSION 2013-03-04 15:02:54.235 -----------------------------------------------
+eclipse.buildId=I20120502-2000
+java.version=1.7.0_15
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86, WS=gtk, NL=en_CA
+Command-line arguments:  -os linux -ws gtk -arch x86
+
+!ENTRY org.eclipse.ui 4 4 2013-03-04 15:03:28.374
+!MESSAGE Could not create view: 'org.eclipse.ui.internal.introview'.
+
+!ENTRY org.eclipse.ui 4 0 2013-03-04 15:03:34.442
+!MESSAGE Problems occurred restoring workbench.
+!SUBENTRY 1 unknown 0 0 2013-03-04 15:03:34.443
+!MESSAGE OK
+!SUBENTRY 1 unknown 0 0 2013-03-04 15:03:34.443
+!MESSAGE OK
+!SUBENTRY 1 unknown 0 0 2013-03-04 15:03:34.443
+!MESSAGE OK
+!SUBENTRY 1 unknown 0 0 2013-03-04 15:03:34.443
+!MESSAGE OK
+!SUBENTRY 1 org.eclipse.ui 4 0 2013-03-04 15:03:34.443
+!MESSAGE Unable to restore perspective: Workspace - Java.
+!SUBENTRY 2 org.eclipse.ui 0 0 2013-03-04 15:03:34.444
+!MESSAGE Problems occurred restoring perspective.
+!SUBENTRY 3 org.eclipse.ui 0 0 2013-03-04 15:03:34.444
+!MESSAGE 
+!SUBENTRY 2 unknown 0 0 2013-03-04 15:03:34.444
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2013-03-04 15:03:34.444
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2013-03-04 15:03:34.444
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2013-03-04 15:03:34.444
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2013-03-04 15:03:34.445
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2013-03-04 15:03:34.445
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2013-03-04 15:03:34.445
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2013-03-04 15:03:34.445
+!MESSAGE OK
+!SUBENTRY 2 org.eclipse.ui 4 0 2013-03-04 15:03:34.445
+!MESSAGE Could not find view: org.eclipse.ui.internal.introview
+!SUBENTRY 1 unknown 0 0 2013-03-04 15:03:34.445
+!MESSAGE OK
+!SESSION 2013-03-07 08:20:06.538 -----------------------------------------------
+eclipse.buildId=I20120502-2000
+java.version=1.7.0_15
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86, WS=gtk, NL=en_CA
+Command-line arguments:  -os linux -ws gtk -arch x86
+
+!ENTRY org.eclipse.ui 4 4 2013-03-07 08:20:38.344
+!MESSAGE Could not create view: 'org.eclipse.ui.internal.introview'.
+
+!ENTRY org.eclipse.ui 4 0 2013-03-07 08:20:45.272
+!MESSAGE Problems occurred restoring workbench.
+!SUBENTRY 1 unknown 0 0 2013-03-07 08:20:45.272
+!MESSAGE OK
+!SUBENTRY 1 unknown 0 0 2013-03-07 08:20:45.273
+!MESSAGE OK
+!SUBENTRY 1 unknown 0 0 2013-03-07 08:20:45.273
+!MESSAGE OK
+!SUBENTRY 1 unknown 0 0 2013-03-07 08:20:45.273
+!MESSAGE OK
+!SUBENTRY 1 org.eclipse.ui 4 0 2013-03-07 08:20:45.273
+!MESSAGE Unable to restore perspective: Workspace - Java.
+!SUBENTRY 2 org.eclipse.ui 0 0 2013-03-07 08:20:45.273
+!MESSAGE Problems occurred restoring perspective.
+!SUBENTRY 3 org.eclipse.ui 0 0 2013-03-07 08:20:45.273
+!MESSAGE 
+!SUBENTRY 2 unknown 0 0 2013-03-07 08:20:45.273
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2013-03-07 08:20:45.274
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2013-03-07 08:20:45.274
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2013-03-07 08:20:45.274
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2013-03-07 08:20:45.274
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2013-03-07 08:20:45.274
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2013-03-07 08:20:45.274
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2013-03-07 08:20:45.275
+!MESSAGE OK
+!SUBENTRY 2 org.eclipse.ui 4 0 2013-03-07 08:20:45.275
+!MESSAGE Could not find view: org.eclipse.ui.internal.introview
+!SUBENTRY 1 unknown 0 0 2013-03-07 08:20:45.275
+!MESSAGE OK
+!SESSION 2013-03-07 10:15:13.709 -----------------------------------------------
+eclipse.buildId=I20120502-2000
+java.version=1.7.0_15
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86, WS=gtk, NL=en_CA
+Command-line arguments:  -os linux -ws gtk -arch x86
+
+!ENTRY org.eclipse.ui 4 4 2013-03-07 10:15:42.784
+!MESSAGE Could not create view: 'org.eclipse.ui.internal.introview'.
+
+!ENTRY org.eclipse.ui 4 0 2013-03-07 10:15:50.735
+!MESSAGE Problems occurred restoring workbench.
+!SUBENTRY 1 unknown 0 0 2013-03-07 10:15:50.735
+!MESSAGE OK
+!SUBENTRY 1 unknown 0 0 2013-03-07 10:15:50.735
+!MESSAGE OK
+!SUBENTRY 1 unknown 0 0 2013-03-07 10:15:50.735
+!MESSAGE OK
+!SUBENTRY 1 unknown 0 0 2013-03-07 10:15:50.736
+!MESSAGE OK
+!SUBENTRY 1 org.eclipse.ui 4 0 2013-03-07 10:15:50.736
+!MESSAGE Unable to restore perspective: Workspace - Java.
+!SUBENTRY 2 org.eclipse.ui 0 0 2013-03-07 10:15:50.736
+!MESSAGE Problems occurred restoring perspective.
+!SUBENTRY 3 org.eclipse.ui 0 0 2013-03-07 10:15:50.736
+!MESSAGE 
+!SUBENTRY 2 unknown 0 0 2013-03-07 10:15:50.736
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2013-03-07 10:15:50.737
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2013-03-07 10:15:50.737
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2013-03-07 10:15:50.737
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2013-03-07 10:15:50.737
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2013-03-07 10:15:50.737
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2013-03-07 10:15:50.737
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2013-03-07 10:15:50.738
+!MESSAGE OK
+!SUBENTRY 2 org.eclipse.ui 4 0 2013-03-07 10:15:50.738
+!MESSAGE Could not find view: org.eclipse.ui.internal.introview
+!SUBENTRY 1 unknown 0 0 2013-03-07 10:15:50.738
+!MESSAGE OK
+!SESSION 2013-03-07 16:00:11.641 -----------------------------------------------
+eclipse.buildId=I20120502-2000
+java.version=1.7.0_15
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86, WS=gtk, NL=en_CA
+Command-line arguments:  -os linux -ws gtk -arch x86
+
+!ENTRY org.eclipse.ui 4 4 2013-03-07 16:00:53.070
+!MESSAGE Could not create view: 'org.eclipse.ui.internal.introview'.
+
+!ENTRY org.eclipse.ui 4 0 2013-03-07 16:01:00.917
+!MESSAGE Problems occurred restoring workbench.
+!SUBENTRY 1 unknown 0 0 2013-03-07 16:01:00.917
+!MESSAGE OK
+!SUBENTRY 1 unknown 0 0 2013-03-07 16:01:00.917
+!MESSAGE OK
+!SUBENTRY 1 unknown 0 0 2013-03-07 16:01:00.917
+!MESSAGE OK
+!SUBENTRY 1 unknown 0 0 2013-03-07 16:01:00.917
+!MESSAGE OK
+!SUBENTRY 1 org.eclipse.ui 4 0 2013-03-07 16:01:00.917
+!MESSAGE Unable to restore perspective: Workspace - Java.
+!SUBENTRY 2 org.eclipse.ui 0 0 2013-03-07 16:01:00.917
+!MESSAGE Problems occurred restoring perspective.
+!SUBENTRY 3 org.eclipse.ui 0 0 2013-03-07 16:01:00.918
+!MESSAGE 
+!SUBENTRY 2 unknown 0 0 2013-03-07 16:01:00.918
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2013-03-07 16:01:00.918
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2013-03-07 16:01:00.918
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2013-03-07 16:01:00.918
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2013-03-07 16:01:00.918
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2013-03-07 16:01:00.918
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2013-03-07 16:01:00.919
+!MESSAGE OK
+!SUBENTRY 2 unknown 0 0 2013-03-07 16:01:00.919
+!MESSAGE OK
+!SUBENTRY 2 org.eclipse.ui 4 0 2013-03-07 16:01:00.919
+!MESSAGE Could not find view: org.eclipse.ui.internal.introview
+!SUBENTRY 1 unknown 0 0 2013-03-07 16:01:00.919
+!MESSAGE OK

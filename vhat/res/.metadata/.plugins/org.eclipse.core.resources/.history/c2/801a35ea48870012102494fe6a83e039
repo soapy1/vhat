@@ -1,0 +1,43 @@
+import org.newdawn.slick.*;
+
+public class vhat extends BasicGame{
+	
+	player henry;
+	
+	public vhat(){
+		super("vhat");
+	}
+	
+	@Override
+	public void init(GameContainer gc) throws SlickException {
+		henry = new player(0,0,"res/henry.png");
+	}
+
+	@Override
+	public void update(GameContainer gc, int delta) throws SlickException {
+		Input input = gc.getInput();
+		
+		if (input.isKeyDown(Input.KEY_W)){
+			henry.y -= 1;
+		}else if (input.isKeyDown(Input.KEY_S)){
+			henry.y += 1;
+		}else if (input.isKeyDown(Input.KEY_D)){
+			henry.x += 1;
+		}else if (input.isKeyDown(Input.KEY_A)){
+			henry.x -= 1;
+		}
+		
+	}
+	
+	@Override
+	public void render(GameContainer gc, Graphics g) throws SlickException {
+		player.draw(henry.get_x(), henry.get_y(), (float)0.25);
+	}
+	
+	public static void main(String[] args) throws SlickException{
+		AppGameContainer app = new AppGameContainer(new vhat());
+		app.setDisplayMode(1200, 700, false);
+		app.start();
+	}
+
+}

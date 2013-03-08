@@ -1,0 +1,9 @@
+/*
+ * A class for the user
+ */
+
+import org.newdawn.slick.*;
+
+public class player {
+
+}

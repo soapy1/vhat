@@ -1,0 +1,41 @@
+/*
+ * A class for the user
+ */
+
+import org.newdawn.slick.*;
+
+public class player {
+	
+	static float x, y;
+	Image img;
+	static String items [] = new String [3];
+
+	// construct
+	public player(float x_pos, float y_pos, String image) throws SlickException{
+		x = x_pos;
+		y = y_pos;
+		img = new Image(image);
+	}
+	
+	// Returns the x position of the player
+	public static float get_x()throws SlickException{
+		return x;
+	}
+	
+	// Returns the y position of the player
+	public static float get_y() throws SlickException{
+		return y;
+	}
+	
+	// Returns the item in the array item given an index
+	public static String get_items(int index){
+		if (index < 3){				// Makes sure that the index given does not exceed the number of elements in the 
+			return items[index];	// array items.
+		}else{
+			return "error";
+		}
+	}
+
+		
+	}
+

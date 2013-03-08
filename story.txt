@@ -1,0 +1,37 @@
+sophie_lehman@hotmail.com
+xXscoobydoomXx@hotmail.com 
+Dan, Caroline, Jessa
+
+Puzzle Game
+
+Asylum - you are an inmate and want to escape but there are robo-guards that want to stop to you
+
+MISC STUFF
+- if you turn on a flashlight guards will catch you.
+
+LEVELS
+1.Room
+	you are in a closet
+	one wall has an electrical panel
+	the door is electrically activated
+	in one corner of the is a chest with a bunch of stuff (stuffs include flashlight, key, bottle of staganet water, pliers, a comic book, a monkey wrench)
+	PROBLEM: You need to get out of the room
+	SOLUTION: Get the key to open the electrical panel, use the pliers to short circuit the panel - door opens.
+
+2.Hall way
+	One guard (somewhere)
+	PROBLEM: You need to pass the guard without being seen
+	SOLUTION: Don't go in line of sight
+
+Main levels
+	centered around one long hallway 
+	one exit door at end (locked)
+	three doors on either side
+3. 
+		
+
+Second last level
+	One door with the exit sign
+	
+	PROBLEM: You need to get out through the door
+	SOLUTION: You use the comic book edge to Jimmy the door	
