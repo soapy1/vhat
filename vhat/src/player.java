@@ -24,7 +24,7 @@ public class player {
 	 *  
 	 *  Post: The player is drawn at the updated position.
 	 */
-	public static void draw(float x, float y, float scale){
+	public void draw(float x, float y, float scale){
 		img.draw(x,y,scale);				
 	}
 	
