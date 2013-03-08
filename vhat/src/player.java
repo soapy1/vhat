@@ -24,22 +24,12 @@ public class player {
 	 *  
 	 *  Post: The player is drawn at the updated position.
 	 */
-	public void draw(float x, float y, float scale){
+	public void draw(float x, float y, float scale) throws SlickException{
 		img.draw(x,y,scale);				
 	}
 	
-	// Returns the x position of the player
-	public float get_x()throws SlickException{
-		return x;
-	}
-	
-	// Returns the y position of the player
-	public float get_y() throws SlickException{
-		return y;
-	}
-	
 	// Returns the item in the array item given an index
-	public static String get_items(int index){
+	public static String get_items(int index) throws SlickException{
 		if (index < 3){				// Makes sure that the index given does not exceed the number of elements in the 
 			return items[index];	// array items.
 		}else{

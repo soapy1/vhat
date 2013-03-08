@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="30" height="20" tilewidth="32" tileheight="32">
+ <properties>
+  <property name="location" value="2"/>
+ </properties>
+ <tileset firstgid="1" name="dirtBlock" tilewidth="32" tileheight="32">
+  <image source="32x32blocks/Blocks/dirtBlock.png" trans="ff00ff" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="2" name="iceBlock" tilewidth="32" tileheight="32">
+  <image source="32x32blocks/Blocks/iceBlock.png" trans="ff00ff" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="3" name="stoneBlock" tilewidth="32" tileheight="32">
+  <image source="32x32blocks/Blocks/stoneBlock.png" trans="ff00ff" width="32" height="32"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="30" height="20">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA8WUQQ6AIAwEIfz/z3omQGdajIfGA+h0t1tHa2281WGNy1VlzvfoN7JnKwbh9ukZ6SEeGW51Bn9zTZ4ymohWMq/Mjpw8jM6Ibup71I/hmpkbH4hvhkv7Mf+H3Z3bWZvzZudd1XDKe5a3yxjt1e7eTkPEzPLM7tl3LXO1xyY3dC+zea96Srhf1wOp3qC/YAkAAA==
+  </data>
+ </layer>
+</map>
