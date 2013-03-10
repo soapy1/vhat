@@ -31,22 +31,22 @@ public class vhat extends BasicGame{
 	 *		 program this... mapFirst is 30x20 tiles (tiles are 32x32 pixels)  
 	 */ 
 	public void makeInBound(){
-		if (henry.y < 0){													// Upper boundary
+		if (henry.get_y() < 0){													// Upper boundary
 			y_map -= speed;
-			henry.y += speed;
+			henry.ch_y(speed);
 		}
-		if (henry.y > (mapFirst.getHeight()*mapFirst.getTileHeight())){		// Lower boundary
+		if (henry.get_y() > (mapFirst.getHeight()*mapFirst.getTileHeight())){		// Lower boundary
 			y_map += speed;
-			henry.y -= speed;
+			henry.ch_y(-speed);
 		}
 		
-		if (henry.x < 0){													// Left-most boundary
+		if (henry.get_x() < 0){													// Left-most boundary
 			x_map -= speed;
-			henry.x += speed;
+			henry.ch_x(speed);
 		}
-		if (henry.x > (mapFirst.getWidth()*mapFirst.getTileWidth())){		// Right-most boundary
+		if (henry.get_x() > (mapFirst.getWidth()*mapFirst.getTileWidth())){		// Right-most boundary
 			x_map += speed;
-			henry.x -= speed;
+			henry.ch_x(-speed);
 		}
 	}
 	
@@ -56,9 +56,9 @@ public class vhat extends BasicGame{
 	 * 		out a window. 
 	 */
 	public void changeLocation(){
-		if (henry.y == (mapFirst.getHeight()*mapFirst.getTileHeight()-20)){
+		if (henry.get_y() == (mapFirst.getHeight()*mapFirst.getTileHeight()-20)){
 			location = 2;
-		}else if (henry.y == 20){
+		}else if (henry.get_y() == 20){
 			location = 1;
 		}
 	}
@@ -74,16 +74,16 @@ public class vhat extends BasicGame{
 		// Keep in mind that the map is the thing that is actually moving - henry is always stationary
 		if (input.isKeyDown(Input.KEY_UP)){				
 			y_map += speed;
-			henry.y -= speed;
+			henry.ch_y(-speed);
 		}else if (input.isKeyDown(Input.KEY_DOWN)){
 			y_map -= speed;
-			henry.y += speed;
+			henry.ch_y(speed);
 		}else if (input.isKeyDown(Input.KEY_RIGHT)){
 			x_map -= speed;
-			henry.x += speed;
+			henry.ch_x(speed);
 		}else if (input.isKeyDown(Input.KEY_LEFT)){
 			x_map += speed;
-			henry.x -= speed;
+			henry.ch_x(-speed);
 		}	
 	}
 	

@@ -6,9 +6,9 @@ import org.newdawn.slick.*;
 
 public class player {
 	
-	float x, y;
-	static Image img;
-	static String items [] = new String [3];
+	private static float x, y;
+	private Image img;
+	private static String items [] = new String [3];
 
 	// construct
 	public player(float x_pos, float y_pos, String image) throws SlickException{
@@ -26,6 +26,23 @@ public class player {
 	 */
 	public void draw(float x, float y, float scale) throws SlickException{
 		img.draw(x,y,scale);				
+	}
+	
+	
+	float get_x(){
+		return x;
+	}
+	
+	float get_y(){
+		return y;
+	}
+	
+	void ch_y(int speed){
+		y += speed;
+	}
+
+	void ch_x(int speed){
+		x += speed;
 	}
 	
 	// Returns the item in the array item given an index
