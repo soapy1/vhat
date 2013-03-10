@@ -11,9 +11,11 @@ public class vhat extends BasicGame{
 	
 	player henry;					// Reference the player class to create a "henry" player object
 	TiledMap mapFirst;				// The map for the first location
+	mapManager mapFirstInfo;		//		information about the map
 	TiledMap mapSecond;				// The map for the second location
+	mapManager mapSecondInfo;		//		information about the map
 	int location = 1;				// Keeps track of which location (map) henry should be on
-	int speed = 3;					// How many pixels henry moves 
+	int speed = 1;					// How many pixels henry moves 
 	static int screen_width = 1200;	
 	static int screen_height = 640;
 
@@ -26,10 +28,16 @@ public class vhat extends BasicGame{
 	// Initializes everything needed
 	
 	public void init(GameContainer gc) throws SlickException {
-		mapFirst = new TiledMap("res/first.tmx");			// Creates a new "map" object from the TiledMap class (from Slick2D)
-		mapSecond = new TiledMap("res/second.tmx");			//		Same as above except with a different map
-		henry = new player(600,50, "res/henry.png");		// Creates a new "henry" object from the player class
-		}
+		mapFirst = new TiledMap("res/first.tmx");									// Creates a new "map" object from the TiledMap class (from Slick2D)
+		mapSecond = new TiledMap("res/second.tmx");									//		Same as above except with a different map
+	
+		mapFirstInfo = new mapManager(1, mapFirst.getWidth()*mapFirst.getTileWidth()/2,
+				mapFirst.getHeight()*mapFirst.getTileHeight()-50);
+		mapSecondInfo = new mapManager(2, 10,10);
+	
+		henry = new player(mapFirstInfo.get_xSpawn(), mapFirstInfo.get_ySpawn(), 
+				"res/henry.png");													// Creates a new "henry" object from the player class
+	}
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------
 //     
 //		So it seems like everything is going fine.
@@ -65,13 +73,15 @@ public class vhat extends BasicGame{
 	 */
 	public void changeLocation() throws SlickException{
 		
-		/*
-		if (henry.get_y() == (mapFirst.getHeight()*mapFirst.getTileHeight()-20)){
+		if (henry.get_y() == (mapFirst.getHeight()*mapFirst.getTileHeight()-32)){
 		 	location = 2;
-		 }else if (henry.get_y() == 20){
+		 	henry.new_x(mapSecondInfo.get_xSpawn());
+		 	henry.new_y(mapSecondInfo.get_ySpawn());
+		 }else if (henry.get_y() == 0){
 		 	location = 1;
+			henry.new_x(mapFirstInfo.get_xSpawn());
+		 	henry.new_y(mapFirstInfo.get_ySpawn());
 		 }
-		 */
 		
 	}
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------

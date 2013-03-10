@@ -48,6 +48,14 @@ public class player {
 		x += speed;
 	}
 	
+	public void new_x(int newX) throws SlickException{
+		x = newX;
+	}
+	
+	public void new_y(int newY) throws SlickException{
+		y = newY;
+	}
+	
 	// Returns the item in the array item given an index
 	public String get_items(int index) throws SlickException{
 		if (index < 3){				// Makes sure that the index given does not exceed the number of elements in the 
