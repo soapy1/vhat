@@ -6,14 +6,14 @@ import org.newdawn.slick.*;
 
 public class player {
 	
-	private static float x, y;
+	private float x, y;
 	private Image img;
-	private static String items [] = new String [3];
+	private String items [] = new String [3];
 
 	// construct
-	public player(float x_pos, float y_pos, String image) throws SlickException{
-		x = x_pos;							// x position of the player
-		y = y_pos;							// x position of the player	
+	public player(float xPos, float yPos, String image) throws SlickException{
+		x = xPos;
+		y = yPos;
 		img = new Image(image);				// Creates an image of the player that will be used in the main class 
 	}
 	
@@ -28,25 +28,28 @@ public class player {
 		img.draw(x,y,scale);				
 	}
 	
-	
-	float get_x(){
+	// Returns the x coordinate of henry
+	public float get_x() throws SlickException{
 		return x;
 	}
 	
-	float get_y(){
+	// Returns the x coordinate of henry
+	public float get_y() throws SlickException{
 		return y;
 	}
 	
-	void ch_y(int speed){
+	// Changes the y coordinate of henry based on speed
+	public void ch_y(int speed) throws SlickException{
 		y += speed;
 	}
 
-	void ch_x(int speed){
+	// Changes the y coordinate of henry based on speed
+	public void ch_x(int speed) throws SlickException{
 		x += speed;
 	}
 	
 	// Returns the item in the array item given an index
-	public static String get_items(int index) throws SlickException{
+	public String get_items(int index) throws SlickException{
 		if (index < 3){				// Makes sure that the index given does not exceed the number of elements in the 
 			return items[index];	// array items.
 		}else{
