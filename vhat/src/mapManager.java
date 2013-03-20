@@ -29,5 +29,6 @@ public class mapManager{
 		return ySpawn;
 	}
 	
+
 	
 }

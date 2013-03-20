@@ -4,18 +4,20 @@
  * Program Description:  A game... expanding on this laater
  */
 
+//TODO:  checkpoints
+
 import org.newdawn.slick.*;
 import org.newdawn.slick.tiled.*;
 
 public class vhat extends BasicGame{
 	
-	player henry;					// Reference the player class to create a "henry" player object
-	TiledMap mapFirst;				// The map for the first location
-	mapManager mapFirstInfo;		//		information about the map
-	TiledMap mapSecond;				// The map for the second location
-	mapManager mapSecondInfo;		//		information about the map
-	int location = 1;				// Keeps track of which location (map) henry should be on
-	int speed = 1;					// How many pixels henry moves 
+	player henry;						// Reference the player class to create a "henry" player object
+	TiledMap mapFirst;					// The map for the first location
+	mapManager mapFirstInfo;			//		information about the map
+	TiledMap mapSecond;					// The map for the second location
+	mapManager mapSecondInfo;			//		information about the map
+	int location = 1;					// Keeps track of which location (map) henry should be on
+	int speed = 1;						// How many pixels henry moves 
 	static int screen_width = 1200;	
 	static int screen_height = 640;
 
@@ -31,9 +33,9 @@ public class vhat extends BasicGame{
 		mapFirst = new TiledMap("res/first.tmx");									// Creates a new "map" object from the TiledMap class (from Slick2D)
 		mapSecond = new TiledMap("res/second.tmx");									//		Same as above except with a different map
 	
-		mapFirstInfo = new mapManager(1, mapFirst.getWidth()*mapFirst.getTileWidth()/2,
-				mapFirst.getHeight()*mapFirst.getTileHeight()-50);
-		mapSecondInfo = new mapManager(2, 10,10);
+		mapFirstInfo = new mapManager(1, 32*20,	mapFirst.getHeight()*mapFirst.		// Creates an instance of mapManager
+				getTileHeight()-50);
+		mapSecondInfo = new mapManager(2, 10,10);									//		Same as above
 	
 		henry = new player(mapFirstInfo.get_xSpawn(), mapFirstInfo.get_ySpawn(), 
 				"res/henry.png");													// Creates a new "henry" object from the player class
@@ -51,19 +53,18 @@ public class vhat extends BasicGame{
 	 *		 program this... mapFirst is 30x20 tiles (tiles are 32x32 pixels)  
 	 */ 
 	public void makeInBound() throws SlickException{
+		// For keeping henry in the screen
 		if (henry.get_y() < 0){														// Upper boundary
-			henry.ch_y(speed);
-		}
-		if (henry.get_y() > (mapFirst.getHeight()*mapFirst.getTileHeight() - 32)){		// Lower boundary
-			henry.ch_y(-speed);
-		}
-		
+			henry.ch_y(speed);}
+		if (henry.get_y() > (mapFirst.getHeight()*mapFirst.getTileHeight() - 32)){	// Lower boundary
+			henry.ch_y(-speed);}
 		if (henry.get_x() < 0){														// Left-most boundary
-			henry.ch_x(speed);
-		}
-		if (henry.get_x() > (mapFirst.getWidth()*mapFirst.getTileWidth() - 32)){			// Right-most boundary
-			henry.ch_x(-speed);
-		}
+			henry.ch_x(speed);}
+		if (henry.get_x() > (mapFirst.getWidth()*mapFirst.getTileWidth() - 32)){	// Right-most boundary
+			henry.ch_x(-speed);}
+		
+		// For keeping henry in the path thing
+		
 	}
 	
 	/*
@@ -73,11 +74,12 @@ public class vhat extends BasicGame{
 	 */
 	public void changeLocation() throws SlickException{
 		
-		if (henry.get_y() == (mapFirst.getHeight()*mapFirst.getTileHeight()-32)){
+		if (henry.get_y() == (mapFirst.getHeight()*mapFirst.getTileHeight()-32) && 
+				henry.get_x() > 32*28 && henry.get_x() < 32*30){
 		 	location = 2;
 		 	henry.new_x(mapSecondInfo.get_xSpawn());
 		 	henry.new_y(mapSecondInfo.get_ySpawn());
-		 }else if (henry.get_y() == 0){
+		 }else if (henry.get_y() == 0 && henry.get_x() > 0 && henry.get_x() < 32*2){
 		 	location = 1;
 			henry.new_x(mapFirstInfo.get_xSpawn());
 		 	henry.new_y(mapFirstInfo.get_ySpawn());

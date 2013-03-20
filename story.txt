@@ -5,7 +5,24 @@ Asylum - you are an inmate and want to escape but there are robo-guards that wan
 MISC STUFF
 - if you turn on a flashlight guards will catch you.
 
-LEVELS
+CHARACTERS
+Enemies
+	Doctor:  If you get caught by these peeps, you get a lobotomy.
+		 # Developers Note:  field of vision = 3
+	Nurse:  If you get caught by these peeps, you get leathal ingection.
+		# Developers Note:  field of vision = 2
+	Dead brains:  Being that are brain dead and walk around like zombies.  If
+                      encountered, they eat you.
+		     # Developers Note:  field of vision = 1
+Allies
+	You: You can't speak when you wake up, however, you are intelligent... or
+             not.
+	That girl:  The companion (in your head) that gives you tips and stuff  
+                    (she communicates with you telepathically but you don't know
+                    why).
+		   # Developers Note:  she answers the players questions.    
+
+INTRO LEVELS
 1.Room
 	you are in a closet
 	one wall has an electrical panel
@@ -19,11 +36,12 @@ LEVELS
 	PROBLEM: You need to pass the guard without being seen
 	SOLUTION: Don't go in line of sight
 
-Main levels
+MAIN LEVELS
 	centered around one long hallway 
 	one exit door at end (locked)
 	three doors on either side
-3. 
+1.Room 1
+ 
 		
 
 Second last level
