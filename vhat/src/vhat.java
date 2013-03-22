@@ -26,79 +26,91 @@ public class vhat extends BasicGame{
 		super("vhat");
 	}
 	
-//--------------------------------------------------------------------------------------------------------------------------------------------------------------
 	// Initializes everything needed
-	
 	public void init(GameContainer gc) throws SlickException {
 		mapFirst = new TiledMap("res/first.tmx");									// Creates a new "map" object from the TiledMap class (from Slick2D)
 		mapSecond = new TiledMap("res/second.tmx");									//		Same as above except with a different map
 	
 		mapFirstInfo = new mapManager(1, 32*20,	mapFirst.getHeight()*mapFirst.		// Creates an instance of mapManager
-				getTileHeight()-50);
-		mapSecondInfo = new mapManager(2, 10,10);									//		Same as above
+				getTileHeight()-50);												// mapFirst is 30x20 tiles (tiles are 32x32 pixels)
+		mapSecondInfo = new mapManager(2, 32*5,0);									//		Same as above
 	
 		henry = new player(mapFirstInfo.get_xSpawn(), mapFirstInfo.get_ySpawn(), 
 				"res/henry.png");													// Creates a new "henry" object from the player class
 	}
-//--------------------------------------------------------------------------------------------------------------------------------------------------------------
-//     
-//		So it seems like everything is going fine.
-//
-//--------------------------------------------------------------------------------------------------------------------------------------------------------------
-	// Methods needed for the game to work without too many redundancies... ... there will still be redundancies 
 		
 	/* 
-	 * Makes sure that henry is in bounds.  If henry is not in bounds, he is moved back
-	 * Note: All of the maps must be the same size (as mapFirst)... Well as it goes should have planed out how I was going
-	 *		 program this... mapFirst is 30x20 tiles (tiles are 32x32 pixels)  
+	 * Makes sure that henry is in bounds.  If henry is not in bounds, he is moved back  
 	 */ 
-	public void makeInBound() throws SlickException{
+	public void makeInBound(TiledMap map) throws SlickException{
 		// For keeping henry in the screen
-		if (henry.get_y() < 0){														// Upper boundary
+		if (henry.get_y() < 0){												// Upper boundary
 			henry.ch_y(speed);}
-		if (henry.get_y() > (mapFirst.getHeight()*mapFirst.getTileHeight() - 32)){	// Lower boundary
+		if (henry.get_y() > (map.getHeight()*map.getTileHeight() - 32)){	// Lower boundary
 			henry.ch_y(-speed);}
-		if (henry.get_x() < 0){														// Left-most boundary
+		if (henry.get_x() < 0){												// Left-most boundary
 			henry.ch_x(speed);}
-		if (henry.get_x() > (mapFirst.getWidth()*mapFirst.getTileWidth() - 32)){	// Right-most boundary
+		if (henry.get_x() > (map.getWidth()*map.getTileWidth() - 32)){		// Right-most boundary
 			henry.ch_x(-speed);}
 		
-		// For keeping henry in the path thing
-		
+		// Stupid thing for keeping henry in the path 
+		int t;
+		int x = ((int)henry.get_x())/32;							// Gets henry's x position in terms of tiles
+		int y = ((int)henry.get_y()+henry.get_height())/32;			// Gets henry's y position in terms of tiles
+		try{
+			t = map.getTileId(x, y, 0);								// The id of the tile that henry is on
+			if (t != 1){											// If henry is not on the brick tile, adjust
+				if  (map.getTileId((int)henry.get_x()/32,
+						((int)henry.get_y()+henry.get_height()-1)/32, 0) == 1){
+					henry.ch_y(-1);
+				}else if  (map.getTileId((int)henry.get_x()/32,
+						((int)henry.get_y()+henry.get_height()+1)/32, 0) == 1){
+					henry.ch_y(1);
+				}else if  (map.getTileId(((int)henry.get_x()-1)/32,
+						((int)henry.get_y()+henry.get_height())/32, 0) == 1){
+					henry.ch_x(-1);
+				}else if  (map.getTileId(((int)henry.get_x()+1)/32,
+						((int)henry.get_y()+henry.get_height())/32, 0) == 1){
+					henry.ch_x(1);
+				}
+			}
+		}catch (ArrayIndexOutOfBoundsException e){				// So that it does not goof up
+			//System.err.println("error found");
+		}
 	}
 	
 	/*
 	 * Changes the map that is displayed 
 	 * 		I know I am going to look at this tomorrow and want to throw this computer
 	 * 		out a window. 
+	 * 
+	 * 		NOTE: will need to have selection for different maps
 	 */
 	public void changeLocation() throws SlickException{
 		
 		if (henry.get_y() == (mapFirst.getHeight()*mapFirst.getTileHeight()-32) && 
-				henry.get_x() > 32*28 && henry.get_x() < 32*30){
-		 	location = 2;
+				henry.get_x() > 32*28 && henry.get_x() < 32*30){						// When henry is on a transporting spot
+		 	location = 2;																// Moves onto next location
 		 	henry.new_x(mapSecondInfo.get_xSpawn());
 		 	henry.new_y(mapSecondInfo.get_ySpawn());
-		 }else if (henry.get_y() == 0 && henry.get_x() > 0 && henry.get_x() < 32*2){
+		 }else if (henry.get_y() == 0 && henry.get_x() > 32*2 && henry.get_x() < 32*3){
 		 	location = 1;
 			henry.new_x(mapFirstInfo.get_xSpawn());
 		 	henry.new_y(mapFirstInfo.get_ySpawn());
 		 }
-		
 	}
-//--------------------------------------------------------------------------------------------------------------------------------------------------------------
-//	
-//		Oh man, this is getting messy.
-//	
-//--------------------------------------------------------------------------------------------------------------------------------------------------------------
-	// Updates variables based on the user input
-	
+
+	// Updates variables based on the user input	
 	public void update(GameContainer gc, int delta) throws SlickException {
 		Input input = gc.getInput();		// Creates an input object
 		
-		makeInBound();
+		if (location == 1){
+			makeInBound(mapFirst);
+		}else if (location == 2){
+			makeInBound(mapSecond);
+		}
 		changeLocation();
-	
+		
 		// Determines the new position on henry depending on the arrow key that is pressed
 		// Keep in mind that the map is the thing that is actually moving - henry is always stationary
 		if (input.isKeyDown(Input.KEY_UP)){				
@@ -111,13 +123,8 @@ public class vhat extends BasicGame{
 			henry.ch_x(-speed);
 		}	
 	}
-//--------------------------------------------------------------------------------------------------------------------------------------------------------------
-//
-//		...
-//	
-//--------------------------------------------------------------------------------------------------------------------------------------------------------------	
+
 	// Renders things to the screen based on the variables that were modified in the update method
-	
 	public void render(GameContainer gc, Graphics g) throws SlickException {
 		// Determines which map to render based on location - see line 58 
 		if (location == 1){
@@ -127,9 +134,7 @@ public class vhat extends BasicGame{
 		}
 		henry.draw(henry.get_x(),henry.get_y(), (float)1);	// Draws henry at his x and y position									
 	}
-//--------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-		
+	
 	public static void main(String[] args) throws SlickException{
 		AppGameContainer app = new AppGameContainer(new vhat());	// Creates new "app" object
 		app.setDisplayMode(screen_width, screen_height, false);		// Sets the display mode: dimensions are 1200 by 700 and windowed

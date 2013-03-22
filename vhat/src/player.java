@@ -28,6 +28,14 @@ public class player {
 		img.draw(x,y,scale);				
 	}
 	
+	public int get_height() throws SlickException{
+		return img.getHeight();
+	}
+	
+	public int get_width() throws SlickException{
+		return img.getWidth();
+	}
+	
 	// Returns the x coordinate of henry
 	public float get_x() throws SlickException{
 		return x;
