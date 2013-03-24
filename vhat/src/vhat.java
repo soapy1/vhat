@@ -8,14 +8,19 @@
 
 import org.newdawn.slick.*;
 import org.newdawn.slick.tiled.*;
+import org.newdawn.slick.gui.*;
+import java.awt.Font;
 
 public class vhat extends BasicGame{
 	
 	player henry;						// Reference the player class to create a "henry" player object
+	Image girl;							// Makes the image for henry's companion
+	TextField girlTip;					// This is where the user will be able to hear what henry's companion has to say
 	TiledMap mapFirst;					// The map for the first location
 	mapManager mapFirstInfo;			//		information about the map
 	TiledMap mapSecond;					// The map for the second location
 	mapManager mapSecondInfo;			//		information about the map
+	TrueTypeFont f;
 	int location = 1;					// Keeps track of which location (map) henry should be on
 	int speed = 1;						// How many pixels henry moves 
 	static int screen_width = 1200;	
@@ -28,6 +33,9 @@ public class vhat extends BasicGame{
 	
 	// Initializes everything needed
 	public void init(GameContainer gc) throws SlickException {
+		f = new TrueTypeFont(new Font("res/apple_kid.ttf",
+				java.awt.Font.PLAIN, 14), true);									// Creates a font object
+		
 		mapFirst = new TiledMap("res/first.tmx");									// Creates a new "map" object from the TiledMap class (from Slick2D)
 		mapSecond = new TiledMap("res/second.tmx");									//		Same as above except with a different map
 	
@@ -37,10 +45,58 @@ public class vhat extends BasicGame{
 	
 		henry = new player(mapFirstInfo.get_xSpawn(), mapFirstInfo.get_ySpawn(), 
 				"res/henry.png");													// Creates a new "henry" object from the player class
+		
+		girl = new Image("res/ninja.png");											// Makes henry's companion
+		//TODO:  make this proper in a method that will output text at the right times and
+		//       try to get it to multi line output
+		girlTip = new TextField(gc, f, 960, girl.getHeight()*3, 240, 20);			// Allows for output from henry's companion
+		girlTip.setAcceptingInput(false);											// So the user can't input anything
+		girlTip.setBackgroundColor(Color.lightGray);
+		girlTip.setText("Hello Henry.  I am your companion.  I can help you through this.");
 	}
 		
+	// Updates variables based on the user input	
+	public void update(GameContainer gc, int delta) throws SlickException {
+		Input input = gc.getInput();		// Creates an input object
+		
+		if (location == 1){
+			makeInBound(mapFirst);
+		}else if (location == 2){
+			makeInBound(mapSecond);
+		}
+		changeLocation();
+		
+		// Determines the new position on henry depending on the arrow key that is pressed
+		// Keep in mind that the map is the thing that is actually moving - henry is always stationary
+		if (input.isKeyDown(Input.KEY_UP)){				
+			henry.ch_y(-speed);
+		}else if (input.isKeyDown(Input.KEY_DOWN)){
+			henry.ch_y(speed);
+		}else if (input.isKeyDown(Input.KEY_RIGHT)){
+			henry.ch_x(speed);
+		}else if (input.isKeyDown(Input.KEY_LEFT)){
+			henry.ch_x(-speed);
+		}	
+	}
+
+	// Renders things to the screen based on the variables that were modified in the update method
+	public void render(GameContainer gc, Graphics g) throws SlickException {
+		// Determines which map to render based on location - see line 58 
+		if (location == 1){
+			mapFirst.render(0, 0);
+		}else if (location == 2){
+			mapSecond.render(0, 0);
+		}
+		henry.draw(henry.get_x(),henry.get_y(), (float)1);		// Draws henry at his x and y position		
+		girl.draw((float)986,0, 3);								// Draws henry's companion
+		girlTip.render(gc, g);									// Draws what the companion has to say
+	}
+	
 	/* 
-	 * Makes sure that henry is in bounds.  If henry is not in bounds, he is moved back  
+	 * Makes sure that henry is in bounds.  If henry is not in bounds, he is moved back.
+	 * This method includes keeping henry on the screen and making sure he stays on the path.
+	
+	 * TODO:  get game tile set an adjust method accordingly  
 	 */ 
 	public void makeInBound(TiledMap map) throws SlickException{
 		// For keeping henry in the screen
@@ -84,7 +140,7 @@ public class vhat extends BasicGame{
 	 * 		I know I am going to look at this tomorrow and want to throw this computer
 	 * 		out a window. 
 	 * 
-	 * 		NOTE: will need to have selection for different maps
+	 * 		TODO: will need to have selection for different maps
 	 */
 	public void changeLocation() throws SlickException{
 		
@@ -98,41 +154,6 @@ public class vhat extends BasicGame{
 			henry.new_x(mapFirstInfo.get_xSpawn());
 		 	henry.new_y(mapFirstInfo.get_ySpawn());
 		 }
-	}
-
-	// Updates variables based on the user input	
-	public void update(GameContainer gc, int delta) throws SlickException {
-		Input input = gc.getInput();		// Creates an input object
-		
-		if (location == 1){
-			makeInBound(mapFirst);
-		}else if (location == 2){
-			makeInBound(mapSecond);
-		}
-		changeLocation();
-		
-		// Determines the new position on henry depending on the arrow key that is pressed
-		// Keep in mind that the map is the thing that is actually moving - henry is always stationary
-		if (input.isKeyDown(Input.KEY_UP)){				
-			henry.ch_y(-speed);
-		}else if (input.isKeyDown(Input.KEY_DOWN)){
-			henry.ch_y(speed);
-		}else if (input.isKeyDown(Input.KEY_RIGHT)){
-			henry.ch_x(speed);
-		}else if (input.isKeyDown(Input.KEY_LEFT)){
-			henry.ch_x(-speed);
-		}	
-	}
-
-	// Renders things to the screen based on the variables that were modified in the update method
-	public void render(GameContainer gc, Graphics g) throws SlickException {
-		// Determines which map to render based on location - see line 58 
-		if (location == 1){
-			mapFirst.render(0, 0);
-		}else if (location == 2){
-			mapSecond.render(0, 0);
-		}
-		henry.draw(henry.get_x(),henry.get_y(), (float)1);	// Draws henry at his x and y position									
 	}
 	
 	public static void main(String[] args) throws SlickException{

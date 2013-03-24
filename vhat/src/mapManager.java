@@ -27,8 +27,5 @@ public class mapManager{
 	
 	public int get_ySpawn(){
 		return ySpawn;
-	}
-	
-
-	
+	}	
 }
