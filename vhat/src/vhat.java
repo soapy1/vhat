@@ -15,7 +15,9 @@ public class vhat extends BasicGame{
 	
 	player henry;						// Reference the player class to create a "henry" player object
 	Image girl;							// Makes the image for henry's companion
-	TextField girlTip;					// This is where the user will be able to hear what henry's companion has to say
+	TextField girlTipOne;					// This is where the user will be able to hear what henry's companion has to say
+	TextField girlTipTwo;
+	TextField girlTipThree;
 	TiledMap mapFirst;					// The map for the first location
 	mapManager mapFirstInfo;			//		information about the map
 	TiledMap mapSecond;					// The map for the second location
@@ -23,9 +25,8 @@ public class vhat extends BasicGame{
 	TrueTypeFont f;
 	int location = 1;					// Keeps track of which location (map) henry should be on
 	int speed = 1;						// How many pixels henry moves 
-	static int screen_width = 1200;	
-	static int screen_height = 640;
-
+	static int screen_width = 960;	
+	static int screen_height = 705;
 	// Construct calls construct from BasicGame 
 	public vhat(){
 		super("vhat");
@@ -40,7 +41,7 @@ public class vhat extends BasicGame{
 		mapSecond = new TiledMap("res/second.tmx");									//		Same as above except with a different map
 	
 		mapFirstInfo = new mapManager(1, 32*20,	mapFirst.getHeight()*mapFirst.		// Creates an instance of mapManager
-				getTileHeight()-50);												// mapFirst is 30x20 tiles (tiles are 32x32 pixels)
+				getTileHeight()-64);												// mapFirst is 30x20 tiles (tiles are 32x32 pixels)
 		mapSecondInfo = new mapManager(2, 32*5,0);									//		Same as above
 	
 		henry = new player(mapFirstInfo.get_xSpawn(), mapFirstInfo.get_ySpawn(), 
@@ -49,10 +50,12 @@ public class vhat extends BasicGame{
 		girl = new Image("res/ninja.png");											// Makes henry's companion
 		//TODO:  make this proper in a method that will output text at the right times and
 		//       try to get it to multi line output
-		girlTip = new TextField(gc, f, 960, girl.getHeight()*3, 240, 20);			// Allows for output from henry's companion
-		girlTip.setAcceptingInput(false);											// So the user can't input anything
-		girlTip.setBackgroundColor(Color.lightGray);
-		girlTip.setText("Hello Henry.  I am your companion.  I can help you through this.");
+		girlTipOne = new TextField(gc, f, girl.getWidth(), 640, 500, 20);			// Allows for output from henry's companion
+		girlTipOne.setAcceptingInput(false);										// So the user can't input anything
+		girlTipTwo = new TextField(gc, f, girl.getWidth(), 660, 500, 20);			
+		girlTipTwo.setAcceptingInput(false);
+		girlTipThree = new TextField(gc, f, girl.getWidth(), 680, 500, 20);			
+		girlTipThree.setAcceptingInput(false);
 	}
 		
 	// Updates variables based on the user input	
@@ -65,6 +68,7 @@ public class vhat extends BasicGame{
 			makeInBound(mapSecond);
 		}
 		changeLocation();
+		girlSpeak();
 		
 		// Determines the new position on henry depending on the arrow key that is pressed
 		// Keep in mind that the map is the thing that is actually moving - henry is always stationary
@@ -88,8 +92,25 @@ public class vhat extends BasicGame{
 			mapSecond.render(0, 0);
 		}
 		henry.draw(henry.get_x(),henry.get_y(), (float)1);		// Draws henry at his x and y position		
-		girl.draw((float)986,0, 3);								// Draws henry's companion
-		girlTip.render(gc, g);									// Draws what the companion has to say
+		girl.draw(0,screen_height-girl.getHeight());			// Draws henry's companion
+		girlTipOne.render(gc, g);								// Draws what the companion has to say
+		girlTipTwo.render(gc, g);
+		girlTipThree.render(gc, g);
+	}
+	
+	/*
+	 * A method that determines when the girl will speak and what she will say
+	 * 
+	 * TODO: finish according to story line
+	 */
+	public void girlSpeak() throws SlickException{
+		
+		if (location == 1){
+			girlTipOne.setText("Hello Henry.  I am your companion.  I can help you through this.");
+			girlTipTwo.setText("It seems you are in the first location.");
+		}else if (location ==2){
+			girlTipTwo.setText("Nice.  You are in the second location.");
+		}
 	}
 	
 	/* 
@@ -102,7 +123,7 @@ public class vhat extends BasicGame{
 		// For keeping henry in the screen
 		if (henry.get_y() < 0){												// Upper boundary
 			henry.ch_y(speed);}
-		if (henry.get_y() > (map.getHeight()*map.getTileHeight() - 32)){	// Lower boundary
+		if (henry.get_y() > (map.getHeight()*map.getTileHeight() - 64)){	// Lower boundary
 			henry.ch_y(-speed);}
 		if (henry.get_x() < 0){												// Left-most boundary
 			henry.ch_x(speed);}
@@ -144,7 +165,7 @@ public class vhat extends BasicGame{
 	 */
 	public void changeLocation() throws SlickException{
 		
-		if (henry.get_y() == (mapFirst.getHeight()*mapFirst.getTileHeight()-32) && 
+		if (henry.get_y() == (mapFirst.getHeight()*mapFirst.getTileHeight()-64) && 
 				henry.get_x() > 32*28 && henry.get_x() < 32*30){						// When henry is on a transporting spot
 		 	location = 2;																// Moves onto next location
 		 	henry.new_x(mapSecondInfo.get_xSpawn());
