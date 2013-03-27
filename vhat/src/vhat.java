@@ -1,7 +1,7 @@
 /*
  * Programmed By:  BA Media Club
  * Programmed For:  BA Media Club
- * Program Description:  A game... expanding on this laater
+ * Program Description:  A game... expanding on this later
  */
 
 //TODO:  checkpoints
@@ -15,18 +15,20 @@ public class vhat extends BasicGame{
 	
 	player henry;						// Reference the player class to create a "henry" player object
 	Image girl;							// Makes the image for henry's companion
-	TextField girlTipOne;					// This is where the user will be able to hear what henry's companion has to say
-	TextField girlTipTwo;
+	TextField girlTipOne;				// This is where the user will be able to hear what henry's companion has to say
+	TextField girlTipTwo;				//		There are three because a text field does not support multi-line text
 	TextField girlTipThree;
 	TiledMap mapFirst;					// The map for the first location
 	mapManager mapFirstInfo;			//		information about the map
 	TiledMap mapSecond;					// The map for the second location
 	mapManager mapSecondInfo;			//		information about the map
 	TrueTypeFont f;
+	
 	int location = 1;					// Keeps track of which location (map) henry should be on
 	int speed = 1;						// How many pixels henry moves 
 	static int screen_width = 960;	
 	static int screen_height = 705;
+	
 	// Construct calls construct from BasicGame 
 	public vhat(){
 		super("vhat");
@@ -34,8 +36,7 @@ public class vhat extends BasicGame{
 	
 	// Initializes everything needed
 	public void init(GameContainer gc) throws SlickException {
-		f = new TrueTypeFont(new Font("res/apple_kid.ttf",
-				java.awt.Font.PLAIN, 14), true);									// Creates a font object
+		f = new TrueTypeFont(new Font("", java.awt.Font.PLAIN, 14), true);			// Creates a font object
 		
 		mapFirst = new TiledMap("res/first.tmx");									// Creates a new "map" object from the TiledMap class (from Slick2D)
 		mapSecond = new TiledMap("res/second.tmx");									//		Same as above except with a different map
@@ -48,8 +49,6 @@ public class vhat extends BasicGame{
 				"res/henry.png");													// Creates a new "henry" object from the player class
 		
 		girl = new Image("res/ninja.png");											// Makes henry's companion
-		//TODO:  make this proper in a method that will output text at the right times and
-		//       try to get it to multi line output
 		girlTipOne = new TextField(gc, f, girl.getWidth(), 640, 500, 20);			// Allows for output from henry's companion
 		girlTipOne.setAcceptingInput(false);										// So the user can't input anything
 		girlTipTwo = new TextField(gc, f, girl.getWidth(), 660, 500, 20);			
@@ -60,15 +59,16 @@ public class vhat extends BasicGame{
 		
 	// Updates variables based on the user input	
 	public void update(GameContainer gc, int delta) throws SlickException {
-		Input input = gc.getInput();		// Creates an input object
+		Input input = gc.getInput();	// Creates an input object
 		
-		if (location == 1){
-			makeInBound(mapFirst);
+		if (location == 1){				// So the computer can keep track which map henry is on
+			makeInBound(mapFirst);		//		and make henry inBound in that map.
 		}else if (location == 2){
 			makeInBound(mapSecond);
 		}
-		changeLocation();
-		girlSpeak();
+		
+		changeLocation();		// Changes the location of henry if he is at a changing point
+		girlSpeak();			// For henry's companion to talk
 		
 		// Determines the new position on henry depending on the arrow key that is pressed
 		// Keep in mind that the map is the thing that is actually moving - henry is always stationary
@@ -84,10 +84,9 @@ public class vhat extends BasicGame{
 	}
 
 	// Renders things to the screen based on the variables that were modified in the update method
-	public void render(GameContainer gc, Graphics g) throws SlickException {
-		// Determines which map to render based on location - see line 58 
-		if (location == 1){
-			mapFirst.render(0, 0);
+	public void render(GameContainer gc, Graphics g) throws SlickException { 
+		if (location == 1){				// Determines which map to render based on location
+			mapFirst.render(0, 0);		//	(which map henry is on)
 		}else if (location == 2){
 			mapSecond.render(0, 0);
 		}
@@ -101,15 +100,18 @@ public class vhat extends BasicGame{
 	/*
 	 * A method that determines when the girl will speak and what she will say
 	 * 
-	 * TODO: finish according to story line
+	 * TODO: Do this according to story line
 	 */
 	public void girlSpeak() throws SlickException{
 		
 		if (location == 1){
 			girlTipOne.setText("Hello Henry.  I am your companion.  I can help you through this.");
 			girlTipTwo.setText("It seems you are in the first location.");
+			girlTipThree.setText("");
 		}else if (location ==2){
-			girlTipTwo.setText("Nice.  You are in the second location.");
+			girlTipOne.setText("Nice.  You are in the second location.");
+			girlTipTwo.setText("");
+			girlTipThree.setText("");
 		}
 	}
 	
@@ -120,6 +122,7 @@ public class vhat extends BasicGame{
 	 * TODO:  get game tile set an adjust method accordingly  
 	 */ 
 	public void makeInBound(TiledMap map) throws SlickException{
+		
 		// For keeping henry in the screen
 		if (henry.get_y() < 0){												// Upper boundary
 			henry.ch_y(speed);}
@@ -131,30 +134,62 @@ public class vhat extends BasicGame{
 			henry.ch_x(-speed);}
 		
 		// Stupid thing for keeping henry in the path 
+		/*
 		int t;
-		int x = ((int)henry.get_x())/32;							// Gets henry's x position in terms of tiles
+		int x = ((int)henry.get_x()+henry.get_width())/32;		// Gets henry's x position in terms of tiles
 		int y = ((int)henry.get_y()+henry.get_height())/32;			// Gets henry's y position in terms of tiles
 		try{
-			t = map.getTileId(x, y, 0);								// The id of the tile that henry is on
-			if (t != 1){											// If henry is not on the brick tile, adjust
-				if  (map.getTileId((int)henry.get_x()/32,
-						((int)henry.get_y()+henry.get_height()-1)/32, 0) == 1){
+			t = map.getTileId(x, y, 1);								// The id of the tile that henry is on
+			if (t == 2){											// If henry is not on the brick tile, adjust
+				if  (map.getTileId(x,((int)henry.get_y()+henry.get_height()-1)/32, 1) != 2){
 					henry.ch_y(-1);
-				}else if  (map.getTileId((int)henry.get_x()/32,
-						((int)henry.get_y()+henry.get_height()+1)/32, 0) == 1){
+				}else if  (map.getTileId(x,((int)henry.get_y()+henry.get_height()+1)/3, 1) != 2){
 					henry.ch_y(1);
-				}else if  (map.getTileId(((int)henry.get_x()-1)/32,
-						((int)henry.get_y()+henry.get_height())/32, 0) == 1){
+				}else if  (map.getTileId(((int)henry.get_x()/2-1)/32,y, 1) != 2){
 					henry.ch_x(-1);
-				}else if  (map.getTileId(((int)henry.get_x()+1)/32,
-						((int)henry.get_y()+henry.get_height())/32, 0) == 1){
+				}else if  (map.getTileId(((int)henry.get_x()/2+1)/32,y, 1) != 2){
 					henry.ch_x(1);
 				}
 			}
 		}catch (ArrayIndexOutOfBoundsException e){				// So that it does not goof up
 			//System.err.println("error found");
 		}
+		*/
+		
+		int t;
+		int xR = ((int)henry.get_x()+henry.get_width()+8)/32;		// Gets henry's x position in terms of tiles
+		int yB = ((int)henry.get_y()+henry.get_height()-32)/32;		// Gets henry's y position in terms of tiles
+		int xL = ((int)henry.get_x()-24)/32;
+		int yT = ((int)henry.get_y()+henry.get_height()+32)/32;
+		try{
+			t = map.getTileId((xR+xL)/2, (yT+yB)/2, 1);				// The id of the tile that henry is on
+			if (t == 2){											// If henry is not on the brick tile, adjust
+				int trTile = map.getTileId(xR, yT, 1);
+				int tlTile = map.getTileId(xL, yT, 1);
+				int brTile = map.getTileId(xR, yB, 1);
+				int blTile = map.getTileId(xL, yB, 1);
+				
+				if (trTile != 2 && tlTile != 2){
+					henry.ch_y(1);
+				}
+				if (brTile != 2 && blTile != 2){
+					henry.ch_y(-1);
+				}
+				if (trTile != 2 && brTile != 2){
+					henry.ch_x(1);
+				}
+				if (tlTile != 2 && blTile != 2){
+					henry.ch_x(-1);
+				}
+			}
+		}catch (ArrayIndexOutOfBoundsException e){				// So that it does not goof up
+			//System.err.println("error found");
+		}catch (IndexOutOfBoundsException e){
+			//System.err.println("error found");
+		}
+		
 	}
+	
 	
 	/*
 	 * Changes the map that is displayed 
@@ -179,7 +214,7 @@ public class vhat extends BasicGame{
 	
 	public static void main(String[] args) throws SlickException{
 		AppGameContainer app = new AppGameContainer(new vhat());	// Creates new "app" object
-		app.setDisplayMode(screen_width, screen_height, false);		// Sets the display mode: dimensions are 1200 by 700 and windowed
+		app.setDisplayMode(screen_width, screen_height, false);		// Sets the display mode
 		app.start();												// Runs the app.
 	}
 
