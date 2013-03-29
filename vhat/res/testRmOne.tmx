@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="30" height="20" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="vhatBase" tilewidth="32" tileheight="32">
+  <image source="vhatBase.png" trans="ff00ff" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="2" name="vhatTilesetOne" tilewidth="32" tileheight="32">
+  <image source="vhatTilesetOne.png" trans="ff00ff" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="3" name="vhatTilesetTwo" tilewidth="32" tileheight="32">
+  <image source="vhatTilesetTwo.png" trans="ff00ff" width="128" height="64"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="30" height="20">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA+WUyxKAIAhFLUul///gXNAMw/gANBe1OAsd4cJFjc65E0mZzUAYjPELda/MgYBRl+aQEonPFI3ntRwtarVqerf0a/H1j0hman2XozPt3RFeu6TOUow2D3/3kv8jEJ2EMaU9ja6EQLwGovvk8i/p8vkC7tEzvflKdSObGV9bPJP2CI21xTONP6uZ7bPGl5k+f52dcAP/Q0cMYAkAAA==
+  </data>
+ </layer>
+</map>
