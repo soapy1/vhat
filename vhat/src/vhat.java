@@ -38,8 +38,8 @@ public class vhat extends BasicGame{
 	public void init(GameContainer gc) throws SlickException {
 		f = new TrueTypeFont(new Font("", java.awt.Font.PLAIN, 14), true);			// Creates a font object
 		
-		mapFirst = new TiledMap("res/first.tmx");									// Creates a new "map" object from the TiledMap class (from Slick2D)
-		mapSecond = new TiledMap("res/second.tmx");									//		Same as above except with a different map
+		mapFirst = new TiledMap("res/testRmOne.tmx");									// Creates a new "map" object from the TiledMap class (from Slick2D)
+		mapSecond = new TiledMap("res/testRmTwo.tmx");									//		Same as above except with a different map
 	
 		mapFirstInfo = new mapManager(1, 32*20,	mapFirst.getHeight()*mapFirst.		// Creates an instance of mapManager
 				getTileHeight()-64);												// mapFirst is 30x20 tiles (tiles are 32x32 pixels)
@@ -118,11 +118,8 @@ public class vhat extends BasicGame{
 	/* 
 	 * Makes sure that henry is in bounds.  If henry is not in bounds, he is moved back.
 	 * This method includes keeping henry on the screen and making sure he stays on the path.
-	
-	 * TODO:  get game tile set an adjust method accordingly  
 	 */ 
 	public void makeInBound(TiledMap map) throws SlickException{
-		
 		// For keeping henry in the screen
 		if (henry.get_y() < 0){												// Upper boundary
 			henry.ch_y(speed);}
@@ -134,52 +131,26 @@ public class vhat extends BasicGame{
 			henry.ch_x(-speed);}
 		
 		// Stupid thing for keeping henry in the path 
-		/*
-		int t;
-		int x = ((int)henry.get_x()+henry.get_width())/32;		// Gets henry's x position in terms of tiles
-		int y = ((int)henry.get_y()+henry.get_height())/32;			// Gets henry's y position in terms of tiles
-		try{
-			t = map.getTileId(x, y, 1);								// The id of the tile that henry is on
-			if (t == 2){											// If henry is not on the brick tile, adjust
-				if  (map.getTileId(x,((int)henry.get_y()+henry.get_height()-1)/32, 1) != 2){
-					henry.ch_y(-1);
-				}else if  (map.getTileId(x,((int)henry.get_y()+henry.get_height()+1)/3, 1) != 2){
-					henry.ch_y(1);
-				}else if  (map.getTileId(((int)henry.get_x()/2-1)/32,y, 1) != 2){
-					henry.ch_x(-1);
-				}else if  (map.getTileId(((int)henry.get_x()/2+1)/32,y, 1) != 2){
-					henry.ch_x(1);
-				}
-			}
-		}catch (ArrayIndexOutOfBoundsException e){				// So that it does not goof up
-			//System.err.println("error found");
-		}
-		*/
+		int top = (int)henry.get_y()+48;						//|
+		int bottom = (int)henry.get_y()+henry.get_height();		//| Defines henry's 
+		int left = (int)henry.get_x()+4;						//| hit box
+		int right = (int)henry.get_x()+henry.get_width()-4;		//|
 		
-		int t;
-		int xR = ((int)henry.get_x()+henry.get_width()+8)/32;		// Gets henry's x position in terms of tiles
-		int yB = ((int)henry.get_y()+henry.get_height()-32)/32;		// Gets henry's y position in terms of tiles
-		int xL = ((int)henry.get_x()-24)/32;
-		int yT = ((int)henry.get_y()+henry.get_height()+32)/32;
+		int t = map.getTileId(((int)((left+right)/2)/32),(int)(((top+bottom)/2)/32), 0);	// Tiled id at center of hit box
 		try{
-			t = map.getTileId((xR+xL)/2, (yT+yB)/2, 1);				// The id of the tile that henry is on
-			if (t == 2){											// If henry is not on the brick tile, adjust
-				int trTile = map.getTileId(xR, yT, 1);
-				int tlTile = map.getTileId(xL, yT, 1);
-				int brTile = map.getTileId(xR, yB, 1);
-				int blTile = map.getTileId(xL, yB, 1);
-				
-				if (trTile != 2 && tlTile != 2){
-					henry.ch_y(1);
-				}
-				if (brTile != 2 && blTile != 2){
-					henry.ch_y(-1);
-				}
-				if (trTile != 2 && brTile != 2){
-					henry.ch_x(1);
-				}
-				if (tlTile != 2 && blTile != 2){
-					henry.ch_x(-1);
+			if (t >= 3 && t <= 10){		// If the center of the hit box has a tile id that corresponds to a wall tile, adjust
+				if (map.getTileId(((int)((left+right)/2)/32), (int)(top/32), 0) <= 2 ||				// Top tile is not wall
+						map.getTileId(((int)((left+right)/2)/32), (int)(top/32), 0) >= 11){
+					henry.ch_y(-2);
+				}else if (map.getTileId(((int)((left+right)/2)/32), (int)(bottom/32), 0) <=2 ||		// Bottom tile is not a wall
+						map.getTileId(((int)((left+right)/2)/32), (int)(bottom/32), 0) >= 11){
+					henry.ch_y(2);
+				}else if (map.getTileId((int)(left/32), (int)((top+bottom)/2)/32, 0) <= 2 ||		// Leftmost tile " " " "
+						map.getTileId((int)(left/32), (int)((top+bottom)/2)/32, 0) >= 11){
+					henry.ch_x(-2);
+				}else if (map.getTileId((int)(right/32), (int)((top+bottom)/2)/32, 0) <= 2 ||		// Rightmost tile " " " "
+						map.getTileId((int)(right/32), (int)((top+bottom)/2)/32, 0) >= 11){
+					henry.ch_x(2);
 				}
 			}
 		}catch (ArrayIndexOutOfBoundsException e){				// So that it does not goof up
@@ -187,7 +158,6 @@ public class vhat extends BasicGame{
 		}catch (IndexOutOfBoundsException e){
 			//System.err.println("error found");
 		}
-		
 	}
 	
 	

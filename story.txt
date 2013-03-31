@@ -4,6 +4,7 @@ Asylum - you are an inmate and want to escape but there are robo-guards that wan
 
 MISC STUFF
 - if you turn on a flashlight guards will catch you.
+- first room is the "base" checkpoint
 
 CHARACTERS
 Enemies
