@@ -1,3 +1,4 @@
+package game.vhat;
 /*
  * A class to manage maps.
  */

@@ -1,3 +1,4 @@
+package game.vhat;
 /*
  * Programmed By:  BA Media Club
  * Programmed For:  BA Media Club
@@ -10,7 +11,10 @@ import org.newdawn.slick.*;
 import org.newdawn.slick.tiled.*;
 import org.newdawn.slick.gui.*;
 import java.awt.Font;
-
+/*
+ * TODO: make it with states so that you can have a menu screen and stuff
+ * 		 also, other stuff
+ */
 public class vhat extends BasicGame{
 	
 	player henry;						// Reference the player class to create a "henry" player object
@@ -23,6 +27,9 @@ public class vhat extends BasicGame{
 	TiledMap mapSecond;					// The map for the second location
 	mapManager mapSecondInfo;			//		information about the map
 	TrueTypeFont f;
+	
+	// Keeps track of all the locations that henry has been
+	boolean checkPoints[] = {true, false, false, false};
 	
 	int location = 1;					// Keeps track of which location (map) henry should be on
 	int speed = 1;						// How many pixels henry moves 
@@ -37,6 +44,8 @@ public class vhat extends BasicGame{
 	// Initializes everything needed
 	public void init(GameContainer gc) throws SlickException {
 		f = new TrueTypeFont(new Font("", java.awt.Font.PLAIN, 14), true);			// Creates a font object
+		
+		gc.setShowFPS(false);
 		
 		mapFirst = new TiledMap("res/testRmOne.tmx");									// Creates a new "map" object from the TiledMap class (from Slick2D)
 		mapSecond = new TiledMap("res/testRmTwo.tmx");									//		Same as above except with a different map
@@ -67,6 +76,7 @@ public class vhat extends BasicGame{
 			makeInBound(mapSecond);
 		}
 		
+		// TODO: use event handlers to make this more efficient
 		changeLocation();		// Changes the location of henry if he is at a changing point
 		girlSpeak();			// For henry's companion to talk
 		
@@ -80,7 +90,11 @@ public class vhat extends BasicGame{
 			henry.ch_x(speed);
 		}else if (input.isKeyDown(Input.KEY_LEFT)){
 			henry.ch_x(-speed);
-		}	
+		}
+		
+		if (input.isKeyPressed(Input.KEY_A)){
+			interact();	
+		}
 	}
 
 	// Renders things to the screen based on the variables that were modified in the update method
@@ -113,6 +127,21 @@ public class vhat extends BasicGame{
 			girlTipTwo.setText("");
 			girlTipThree.setText("");
 		}
+	}
+	
+	public void rmGirlSpeak() throws SlickException{
+		girlTipOne.setText("");
+		girlTipTwo.setText("");
+		girlTipThree.setText("");
+	}
+	
+	/*
+	 * A general method that allows henry to interact with the environment
+	 */
+	public void interact() throws SlickException{
+		//TODO: add method
+		rmGirlSpeak();
+		girlTipOne.setText("you tried to do something");
 	}
 	
 	/* 
@@ -154,9 +183,9 @@ public class vhat extends BasicGame{
 				}
 			}
 		}catch (ArrayIndexOutOfBoundsException e){				// So that it does not goof up
-			//System.err.println("error found");
+			e.printStackTrace();
 		}catch (IndexOutOfBoundsException e){
-			//System.err.println("error found");
+			e.printStackTrace();
 		}
 	}
 	

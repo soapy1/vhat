@@ -1,5 +1,7 @@
+package game.vhat;
 /*
  * A class to manage the user.
+ * This is specifically the player user and not anything else
  */
 
 import org.newdawn.slick.*;
