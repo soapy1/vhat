@@ -10,13 +10,15 @@ public class player {
 	
 	private float x, y;
 	private Image img;
+	private int location;
 	private String items [] = new String [3];
 
 	// construct
-	public player(float xPos, float yPos, String image) throws SlickException{
+	public player(float xPos, float yPos, String image, int loc) throws SlickException{
 		x = xPos;
 		y = yPos;
 		img = new Image(image);				// Creates an image of the player that will be used in the main class 
+		location = loc;						// The location/map that henry is currently on	
 	}
 	
 	/*
@@ -66,6 +68,14 @@ public class player {
 		y = newY;
 	}
 	
+	public int get_loc() throws SlickException{
+		return location;
+	}
+	
+	public void set_loc(int l) throws SlickException{
+		location = l;
+	}
+	
 	// Returns the item in the array item given an index
 	public String get_items(int index) throws SlickException{
 		if (index < 3){				// Makes sure that the index given does not exceed the number of elements in the 
@@ -74,5 +84,14 @@ public class player {
 			return "error";
 		}
 	}
+	
+	/*
+	 * A general method that allows henry to interact with the environment
+	 */
+	public void interact(girl gr) throws SlickException{
+		//TODO: add method
+		gr.set_words_bulk("You tried to do something", "", "");
+	}
+	
 }
 
