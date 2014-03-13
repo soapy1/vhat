@@ -31,8 +31,7 @@ public class mapManager{
 	}	
 	
 	// Resets everything and changes map to the next location
-	public void change_loc(player p, int nextLocation) throws SlickException{
-		// TODO: clear enemies... when you make them
+	public void change_loc(player p, location nextLocation) throws SlickException{
 		p.set_loc(nextLocation);
 	}
 }

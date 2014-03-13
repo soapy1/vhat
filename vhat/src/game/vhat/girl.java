@@ -8,12 +8,12 @@ public class girl extends player {
 	
 	// constructor because we have to
 	public girl(float xPos, float yPos, String image, int loc) throws SlickException {
-		super(xPos, yPos, image, loc);
+		super(xPos, yPos, image, location.entrance);
 	}
 
 	// constructor that will actually be used
 	public girl(float xPos, float yPos, String image) throws SlickException {
-		super(xPos, yPos, image, -1);		// location is set to -1, means presence everywhere
+		super(xPos, yPos, image, location.limbo);		// location is set to -1, means presence everywhere
 	}
 
 	// clears the text so that the girl is not saying anything

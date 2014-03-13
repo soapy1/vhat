@@ -54,7 +54,7 @@ public class vhat extends BasicGame{
 		mapSecondInfo = new mapManager(2, 32*5,0);									//		Same as above
 	
 		henry = new player(mapFirstInfo.get_xSpawn(), mapFirstInfo.get_ySpawn(), 
-				"res/henry.png", 1);													// Creates a new "henry" object from the player class
+				"res/henry.png", location.entrance);													// Creates a new "henry" object from the player class
 		
 		girl = new girl(0,0,"res/ninja.png");											// Makes henry's companion
 		girlTipOne = new TextField(gc, f, girl.get_width(), 640, 500, 20);			// Allows for output from henry's companion
@@ -71,9 +71,9 @@ public class vhat extends BasicGame{
 	public void update(GameContainer gc, int delta) throws SlickException {
 		Input input = gc.getInput();	// Creates an input object
 		
-		if (henry.get_loc() == 1){				// So the computer can keep track which map henry is on
+		if (henry.get_loc() == location.entrance){				// So the computer can keep track which map henry is on
 			makeInBound(mapFirst);		//		and make henry inBound in that map.
-		}else if (henry.get_loc() == 2){
+		}else if (henry.get_loc() == location.challengeOne){
 			makeInBound(mapSecond);
 		}
 		
@@ -99,9 +99,9 @@ public class vhat extends BasicGame{
 
 	// Renders things to the screen based on the variables that were modified in the update method
 	public void render(GameContainer gc, Graphics g) throws SlickException { 
-		if (henry.get_loc() == 1){				// Determines which map to render based on location
+		if (henry.get_loc() == location.entrance){				// Determines which map to render based on location
 			mapFirst.render(0, 0);		//	(which map henry is on)
-		}else if (henry.get_loc() == 2){
+		}else if (henry.get_loc() == location.challengeOne){
 			mapSecond.render(0, 0);
 		}
 		henry.draw(henry.get_x(),henry.get_y(), (float)1);		// Draws henry at his x and y position		
@@ -187,22 +187,26 @@ public class vhat extends BasicGame{
 	 */
 	public void changeLocation() throws SlickException{
 		
-		if (henry.get_y() == (mapFirst.getHeight()*mapFirst.getTileHeight()-64) && 
-				henry.get_x() > 32*28 && henry.get_x() < 32*30){						// When henry is on a transporting spot
-		 	henry.set_loc(2);																// Moves onto next location
-		 	henry.new_x(mapSecondInfo.get_xSpawn());
-		 	henry.new_y(mapSecondInfo.get_ySpawn());
+		if (henry.get_loc() == location.entrance){
+			if (henry.get_y() == (mapFirst.getHeight()*mapFirst.getTileHeight()-64) && 
+					henry.get_x() > 32*28 && henry.get_x() < 32*30){						// When henry is on a transporting spot
+				henry.set_loc(location.challengeOne);																// Moves onto next location
+				henry.new_x(mapSecondInfo.get_xSpawn());
+				henry.new_y(mapSecondInfo.get_ySpawn());
 		 	
-		 	girl.set_words_bulk("Congratulations!", "you made it to the second location", "");
-		 	updateGirlSpeak();
-		}else if (henry.get_y() == 0 && henry.get_x() > 32*2 && henry.get_x() < 32*3){
-		 	henry.set_loc(1);
-			henry.new_x(mapFirstInfo.get_xSpawn());
-		 	henry.new_y(mapFirstInfo.get_ySpawn());
+				girl.set_words_bulk("Congratulations!", "you made it to the second location", "");
+				updateGirlSpeak();
+		}
+		}else if (henry.get_loc() == location.challengeOne){
+			if (henry.get_y() == 0 && henry.get_x() > 32*2 && henry.get_x() < 32*3){
+				henry.set_loc(location.entrance);
+				henry.new_x(mapFirstInfo.get_xSpawn());
+				henry.new_y(mapFirstInfo.get_ySpawn());
 
-		 	girl.set_words_bulk("Hello Henry!", "this is the first location", "why don't you look around");
-		 	updateGirlSpeak();
-		 }
+				girl.set_words_bulk("Hello Henry!", "this is the first location", "why don't you look around");
+				updateGirlSpeak();
+			}
+		}
 	}
 	
 	public static void main(String[] args) throws SlickException{

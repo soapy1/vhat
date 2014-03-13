@@ -10,11 +10,11 @@ public class player {
 	
 	private float x, y;
 	private Image img;
-	private int location;
+	private location location;
 	private String items [] = new String [3];
 
 	// construct
-	public player(float xPos, float yPos, String image, int loc) throws SlickException{
+	public player(float xPos, float yPos, String image, location loc) throws SlickException{
 		x = xPos;
 		y = yPos;
 		img = new Image(image);				// Creates an image of the player that will be used in the main class 
@@ -68,11 +68,11 @@ public class player {
 		y = newY;
 	}
 	
-	public int get_loc() throws SlickException{
+	public location get_loc() throws SlickException{
 		return location;
 	}
 	
-	public void set_loc(int l) throws SlickException{
+	public void set_loc(location l) throws SlickException{
 		location = l;
 	}
 	

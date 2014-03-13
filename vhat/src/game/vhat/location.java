@@ -6,5 +6,6 @@ public enum location {
 	pass,
 	passForkOne,
 	passForkTwo,
-	end
+	end,
+	limbo
 }
