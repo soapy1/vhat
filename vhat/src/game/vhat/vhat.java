@@ -8,7 +8,7 @@ package game.vhat;
 //TODO:  checkpoints
 
 import org.newdawn.slick.*;
-import org.newdawn.slick.tiled.*;
+//import org.newdawn.slick.tiled.*;
 import org.newdawn.slick.gui.*;
 import java.awt.Font;
 /*
@@ -22,10 +22,10 @@ public class vhat extends BasicGame{
 	TextField girlTipOne;				// This is where the user will be able to hear what henry's companion has to say
 	TextField girlTipTwo;				//		There are three because a text field does not support multi-line text
 	TextField girlTipThree;
-	TiledMap mapFirst;					// The map for the first location
-	mapManager mapFirstInfo;			//		information about the map
-	TiledMap mapSecond;					// The map for the second location
-	mapManager mapSecondInfo;			//		information about the map
+	//TiledMap mapFirst;					// The map for the first location
+	mapManager mapFirst;			//		information about the map
+	//TiledMap mapSecond;					// The map for the second location
+	mapManager mapSecond;			//		information about the map
 	TrueTypeFont f;
 	
 	// Keeps track of all the locations that henry has been
@@ -46,15 +46,15 @@ public class vhat extends BasicGame{
 		
 		gc.setShowFPS(false);
 		
-		mapFirst = new TiledMap("res/testRmOne.tmx");								// Creates a new "map" object from the TiledMap class (from Slick2D)
-		mapSecond = new TiledMap("res/testRmTwo.tmx");								//		Same as above except with a different map
+		//mapFirst = new TiledMap("res/testRmOne.tmx");								// Creates a new "map" object from the TiledMap class (from Slick2D)
+		//mapSecond = new TiledMap("res/testRmTwo.tmx");								//		Same as above except with a different map
 	
-		mapFirstInfo = new mapManager(1, 32*20,	mapFirst.getHeight()*mapFirst.		// Creates an instance of mapManager
-				getTileHeight()-64);												// mapFirst is 30x20 tiles (tiles are 32x32 pixels)
-		mapSecondInfo = new mapManager(2, 32*5,0);									//		Same as above
+		mapFirst = new mapManager("res/testRmOne.tmx", 1, 32*20,32*20-64); 			// Creates an instance of mapManager
+																					// mapFirst is 30x20 tiles (tiles are 32x32 pixels)
+		mapSecond = new mapManager("res/testRmTwo.tmx", 2, 32*5,0);				//		Same as above
 	
-		henry = new player(mapFirstInfo.get_xSpawn(), mapFirstInfo.get_ySpawn(), 
-				"res/henry.png", location.entrance);													// Creates a new "henry" object from the player class
+		henry = new player(mapFirst.get_xSpawn(), mapFirst.get_ySpawn(), 
+				"res/henry.png", location.entrance);								// Creates a new "henry" object from the player class
 		
 		girl = new girl(0,0,"res/ninja.png");											// Makes henry's companion
 		girlTipOne = new TextField(gc, f, girl.get_width(), 640, 500, 20);			// Allows for output from henry's companion
@@ -136,7 +136,7 @@ public class vhat extends BasicGame{
 	 * Makes sure that henry is in bounds.  If henry is not in bounds, he is moved back.
 	 * This method includes keeping henry on the screen and making sure he stays on the path.
 	 */ 
-	public void makeInBound(TiledMap map) throws SlickException{
+	public void makeInBound(mapManager map) throws SlickException{
 		// For keeping henry in the screen
 		if (henry.get_y() < 0){												// Upper boundary
 			henry.ch_y(speed);}
@@ -191,8 +191,8 @@ public class vhat extends BasicGame{
 			if (henry.get_y() == (mapFirst.getHeight()*mapFirst.getTileHeight()-64) && 
 					henry.get_x() > 32*28 && henry.get_x() < 32*30){						// When henry is on a transporting spot
 				henry.set_loc(location.challengeOne);																// Moves onto next location
-				henry.new_x(mapSecondInfo.get_xSpawn());
-				henry.new_y(mapSecondInfo.get_ySpawn());
+				henry.new_x(mapSecond.get_xSpawn());
+				henry.new_y(mapSecond.get_ySpawn());
 		 	
 				girl.set_words_bulk("Congratulations!", "you made it to the second location", "");
 				updateGirlSpeak();
@@ -200,8 +200,8 @@ public class vhat extends BasicGame{
 		}else if (henry.get_loc() == location.challengeOne){
 			if (henry.get_y() == 0 && henry.get_x() > 32*2 && henry.get_x() < 32*3){
 				henry.set_loc(location.entrance);
-				henry.new_x(mapFirstInfo.get_xSpawn());
-				henry.new_y(mapFirstInfo.get_ySpawn());
+				henry.new_x(mapFirst.get_xSpawn());
+				henry.new_y(mapFirst.get_ySpawn());
 
 				girl.set_words_bulk("Hello Henry!", "this is the first location", "why don't you look around");
 				updateGirlSpeak();
