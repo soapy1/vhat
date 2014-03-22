@@ -28,6 +28,7 @@ public class vhat extends BasicGame{
 	
 	// Keeps track of all the locations that henry has been
 	boolean checkPoints[] = {true, false, false, false};
+	location flow[] = {location.entrance, location.hallway, location.challengeOne, location.hallway};
 	
 	int speed = 1;						// How many pixels henry moves 
 	static int screen_width = 960;	
@@ -49,7 +50,7 @@ public class vhat extends BasicGame{
 		mapSecond = new mapManager("res/testRmTwo.tmx", location.challengeOne, 32*5,0);				//		Same as above
 		hallway = new mapManager("res/hallway.tmx", location.hallway, 32*2, 0);
 		henry = new player(mapFirst.get_xSpawn(), mapFirst.get_ySpawn(), 
-				"res/henry.png", location.entrance);								// Creates a new "henry" object from the player class
+				"res/henryTwoPointO.png", location.entrance);								// Creates a new "henry" object from the player class
 		
 		girl = new girl(0,0,"res/ninja.png");										// Makes henry's companion
 		girlTipOne = new TextField(gc, f, girl.get_width(), 640, 500, 20);			// Allows for output from henry's companion
@@ -70,10 +71,12 @@ public class vhat extends BasicGame{
 			makeInBound(mapFirst);		//		and make henry inBound in that map.
 		}else if (henry.get_loc() == location.challengeOne){
 			makeInBound(mapSecond);
+		}else if (henry.get_loc() == location.hallway){
+			makeInBound(hallway);
 		}
 		
 		// TODO: use event handlers to make this more efficient
-		changeLocation();		// Changes the location of henry if he is at a changing point
+		//changeLocation();		// Changes the location of henry if he is at a changing point
 		
 		// Determines the new position on henry depending on the arrow key that is pressed
 		// Keep in mind that the map is the thing that is actually moving - henry is always stationary
@@ -98,7 +101,10 @@ public class vhat extends BasicGame{
 			mapFirst.render(0, 0);		//	(which map henry is on)
 		}else if (henry.get_loc() == location.challengeOne){
 			mapSecond.render(0, 0);
+		}else if (henry.get_loc() == location.hallway){
+			hallway.render(0, 0);
 		}
+		
 		henry.draw(henry.get_x(),henry.get_y(), (float)1);		// Draws henry at his x and y position		
 		girl.draw(0,screen_height-girl.get_height(),1);			// Draws henry's companion
 		girlTipOne.render(gc, g);								// Draws what the companion has to say
@@ -120,10 +126,12 @@ public class vhat extends BasicGame{
 	 * This method includes keeping henry on the screen and making sure he stays on the path.
 	 */ 
 	public void makeInBound(mapManager map) throws SlickException{
+		//changeLocation();
+		      
 		// For keeping henry in the screen
 		if (henry.get_y() < 0){												// Upper boundary
 			henry.ch_y(speed);}
-		if (henry.get_y() > (map.getHeight()*map.getTileHeight() - 64)){	// Lower boundary
+		if (henry.get_y() > (map.getHeight()*map.getTileHeight() - 32)){	// Lower boundary
 			henry.ch_y(-speed);}
 		if (henry.get_x() < 0){												// Left-most boundary
 			henry.ch_x(speed);}
@@ -131,10 +139,28 @@ public class vhat extends BasicGame{
 			henry.ch_x(-speed);}
 		
 		// Stupid thing for keeping henry in the path 
-		int top = (int)henry.get_y()+48;						//|
+		int top = (int)henry.get_y()+24;						//|
 		int bottom = (int)henry.get_y()+henry.get_height();		//| Defines henry's 
 		int left = (int)henry.get_x()+4;						//| hit box
 		int right = (int)henry.get_x()+henry.get_width()-4;		//|
+		
+		// TODO: STARTING FROM HERE: testing stuff
+		//System.out.println("objectName " + map.getObjectName(0, 0) );
+		//System.out.println("X: " + map.getObjectX(0, 0) + " Y: " + map.getObjectY(0, 0));
+		//System.out.println("width: " + map.getObjectWidth(0, 0) + " height: " + map.getObjectHeight(0, 0));
+		
+		if (left>=map.getExitX() && right<=map.getExitX()+64 && top>=map.getExitY() && bottom<=map.getExitY()+32){
+			henry.set_loc(location.hallway);										// Moves onto next location
+			henry.new_x(mapSecond.get_xSpawn());
+			henry.new_y(mapSecond.get_ySpawn());
+	 	
+			girl.set_words_bulk("Congratulations!", "you made it to the second location", "");
+			updateGirlSpeak();
+		}
+		
+		if (henry.get_loc() == location.hallway){
+			return;
+		}
 		
 		int t = map.getTileId(((int)((left+right)/2)/32),(int)(((top+bottom)/2)/32), 0);	// Tiled id at center of hit box
 		try{
@@ -160,6 +186,10 @@ public class vhat extends BasicGame{
 		}
 	}
 	
+	public void updateLocation(mapManager m, int dir) throws SlickException{
+		location l = m.get_loc();
+		
+	}
 	
 	/*
 	 * Changes the map that is displayed 

@@ -13,7 +13,6 @@ public class mapManager extends TiledMap{
 
 	private location loc;								// Details the map number - because I was not smart and called it location
 	private int xSpawn, ySpawn;						// Details the x and y spawn points of henry on the map
-	private int xExit, yExit;
 
 	public mapManager(String map) throws SlickException{
 		super(map); 
@@ -38,6 +37,14 @@ public class mapManager extends TiledMap{
 	public int get_ySpawn(){
 		return ySpawn;
 	}	
+	
+	public int getExitX(){
+		return getObjectX(0, 0);
+	}
+	
+	public int getExitY(){
+		return getObjectY(0,0);
+	}
 	
 	// Resets everything and changes map to the next location
 	public void change_loc(player p, location nextLocation) throws SlickException{

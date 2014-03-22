@@ -14,4 +14,7 @@
    H4sIAAAAAAAAA+WUSw7AIAhEbW1Vev8D1wVNCPEDaN24eAuNMDCo0Tl3IylzGAiDMX6h7pO5EDDq0hxSIvGZovG8lqNFrVZN75Z+Lb7uiGSm1nc5OtPeHeG1S+osxWjz8Hcv+T8C0UkYU9rT6EoIxGsgul8u/5Muny/gHj3Tm69UN7KZ8bXFM2mP0FhbPNP4s5rZPmt8menzDpzICw+R2XtgCQAA
   </data>
  </layer>
+ <objectgroup name="Spawning" width="30" height="20">
+  <object name="exit" x="896" y="608" width="64" height="32"/>
+ </objectgroup>
 </map>

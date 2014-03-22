@@ -11,7 +11,11 @@
  </tileset>
  <layer name="Tile Layer 1" width="30" height="20">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA92UOw7AIAxDky793P/AZChLVRSMXap28ICEEj9j4WbmoeWU/0RraBPNQGYdoZ3cW2cgsxS8jNfeDDOf6P3eDDOf6P2neVFuFa+iv0xes3vLvvPsnKrfrC8qf9d9WV/u8hzxwvAynWJ4mU61eFsZqnlHzm/9GV9SATPrMCRgCQAA
+   H4sIAAAAAAAAA91WywrAIAxrd9nj/z94HczLmNSYTGGHHISSJjGIbmYeWG74T7AGNhEHwnUEdnJv4UC4FH4Zra0ZZjrR+dYMM53o/Nd+Ud8qv4r+MnmN7i17z6NzKnqzvqj0PfdlfXnLs0cL45fpFOOX6VTNby1Dtd+e86w3A8Wsf8219wRiS46qYAkAAA==
   </data>
  </layer>
+ <objectgroup name="Spawning" width="30" height="20">
+  <object name="enter" x="64" y="0" width="64" height="32"/>
+  <object name="exit" x="928" y="576" width="32" height="64"/>
+ </objectgroup>
 </map>
