@@ -8,7 +8,6 @@ package game.vhat;
 //TODO:  checkpoints
 
 import org.newdawn.slick.*;
-//import org.newdawn.slick.tiled.*;
 import org.newdawn.slick.gui.*;
 import java.awt.Font;
 /*
@@ -22,10 +21,8 @@ public class vhat extends BasicGame{
 	TextField girlTipOne;				// This is where the user will be able to hear what henry's companion has to say
 	TextField girlTipTwo;				//		There are three because a text field does not support multi-line text
 	TextField girlTipThree;
-	//TiledMap mapFirst;					// The map for the first location
-	mapManager mapFirst;			//		information about the map
-	//TiledMap mapSecond;					// The map for the second location
-	mapManager mapSecond;			//		information about the map
+	mapManager mapFirst;				// First map
+	mapManager mapSecond;				// Second map
 	TrueTypeFont f;
 	
 	// Keeps track of all the locations that henry has been
@@ -46,17 +43,14 @@ public class vhat extends BasicGame{
 		
 		gc.setShowFPS(false);
 		
-		//mapFirst = new TiledMap("res/testRmOne.tmx");								// Creates a new "map" object from the TiledMap class (from Slick2D)
-		//mapSecond = new TiledMap("res/testRmTwo.tmx");								//		Same as above except with a different map
-	
-		mapFirst = new mapManager("res/testRmOne.tmx", 1, 32*20,32*20-64); 			// Creates an instance of mapManager
-																					// mapFirst is 30x20 tiles (tiles are 32x32 pixels)
+		// mapFirst is 30x20 tiles (tiles are 32x32 pixels)
+		mapFirst = new mapManager("res/testRmOne.tmx", 1, 32*20,32*20-64); 		// Creates map that can be used
 		mapSecond = new mapManager("res/testRmTwo.tmx", 2, 32*5,0);				//		Same as above
 	
 		henry = new player(mapFirst.get_xSpawn(), mapFirst.get_ySpawn(), 
 				"res/henry.png", location.entrance);								// Creates a new "henry" object from the player class
 		
-		girl = new girl(0,0,"res/ninja.png");											// Makes henry's companion
+		girl = new girl(0,0,"res/ninja.png");										// Makes henry's companion
 		girlTipOne = new TextField(gc, f, girl.get_width(), 640, 500, 20);			// Allows for output from henry's companion
 		girlTipOne.setAcceptingInput(false);										// So the user can't input anything
 		girlTipTwo = new TextField(gc, f, girl.get_width(), 660, 500, 20);			
@@ -118,18 +112,6 @@ public class vhat extends BasicGame{
 		girlTipOne.setText(girl.get_words(0));
 		girlTipTwo.setText(girl.get_words(1));
 		girlTipThree.setText(girl.get_words(2));
-		
-		/*
-		if (henry.get_loc() == 1){
-			girlTipOne.setText("Hello Henry.  I am your companion.  I can help you through this.");
-			girlTipTwo.setText("It seems you are in the first location.");
-			girlTipThree.setText("");
-		}else if (henry.get_loc() ==2){
-			girlTipOne.setText("Nice.  You are in the second location.");
-			girlTipTwo.setText("");
-			girlTipThree.setText("");
-		}
-		*/
 	}
 	
 	/* 
@@ -190,7 +172,7 @@ public class vhat extends BasicGame{
 		if (henry.get_loc() == location.entrance){
 			if (henry.get_y() == (mapFirst.getHeight()*mapFirst.getTileHeight()-64) && 
 					henry.get_x() > 32*28 && henry.get_x() < 32*30){						// When henry is on a transporting spot
-				henry.set_loc(location.challengeOne);																// Moves onto next location
+				henry.set_loc(location.challengeOne);										// Moves onto next location
 				henry.new_x(mapSecond.get_xSpawn());
 				henry.new_y(mapSecond.get_ySpawn());
 		 	
