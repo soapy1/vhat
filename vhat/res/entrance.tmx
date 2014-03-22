@@ -11,7 +11,7 @@
  </tileset>
  <layer name="Tile Layer 1" width="30" height="20">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+WUSw7AIAhEbW1Vev8D1wVNCPEDaN24eAuNMDCo0Tl3IylzGAiDMX6h7pO5EDDq0hxSIvGZovG8lqNFrVZN75Z+Lb7uiGSm1nc5OtPeHeG1S+osxWjz8Hcv+T8C0UkYU9rT6EoIxGsgul8u/5Muny/gHj3Tm69UN7KZ8bXFM2mP0FhbPNP4s5rZPmt8menzDpzICw+R2XtgCQAA
+   H4sIAAAAAAAAA+WU3Q6AIAiFMfOv93/gatONmBqQeePFtyUbHDiYAQBcJl4YBf5jjp2oe6DvpNS9a+wVTCceUL4DneeB5BZoTRzH8+KeJLO35m2h8XRVWjvV3pGRO327I7R3Tp+1HGkd+t9z3g+PdGLOqcUkuhw88joh3VLL/qRL95vg+RYYxn65uoHsjJ41nnFnTJ2zxjOJP7MZ7bPEl5E+r8CWOQHd9GhGYAkAAA==
   </data>
  </layer>
  <objectgroup name="Spawning" width="30" height="20">

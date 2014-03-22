@@ -21,14 +21,13 @@ public class vhat extends BasicGame{
 	TextField girlTipOne;				// This is where the user will be able to hear what henry's companion has to say
 	TextField girlTipTwo;				//		There are three because a text field does not support multi-line text
 	TextField girlTipThree;
-	mapManager mapFirst;				// First map
-	mapManager mapSecond;				// Second map
+	mapManager entrance;				// First map
+	mapManager zim;						// Second map
 	mapManager hallway;					
 	TrueTypeFont f;
 	
 	// Keeps track of all the locations that henry has been
 	boolean checkPoints[] = {true, false, false, false};
-	location flow[] = {location.entrance, location.hallway, location.challengeOne, location.hallway};
 	
 	int speed = 1;						// How many pixels henry moves 
 	static int screen_width = 960;	
@@ -47,10 +46,10 @@ public class vhat extends BasicGame{
 		gc.setShowFPS(false);
 		
 		// mapFirst is 30x20 tiles (tiles are 32x32 pixels)
-		mapFirst = new mapManager("res/testRmOne.tmx", location.entrance, 32*20,32*20-64); 		// Creates map that can be used
-		mapSecond = new mapManager("res/testRmTwo.tmx", location.challengeOne, 32*5,0);				//		Same as above
+		entrance = new mapManager("res/entrance.tmx", location.entrance, 32*20,32*20-64); 		// Creates map that can be used
+		zim = new mapManager("res/zim.tmx", location.zim, 32*5,0);				//		Same as above
 		hallway = new mapManager("res/hallway.tmx", location.hallway, 32*2, 0);
-		henry = new player(mapFirst.get_xSpawn(), mapFirst.get_ySpawn(), 
+		henry = new player(entrance.get_xSpawn(), entrance.get_ySpawn(), 
 				"res/henryTwoPointO.png", location.entrance);								// Creates a new "henry" object from the player class
 		
 		girl = new girl(0,0,"res/ninja.png");										// Makes henry's companion
@@ -69,9 +68,9 @@ public class vhat extends BasicGame{
 		Input input = gc.getInput();	// Creates an input object
 		
 		if (henry.get_loc() == location.entrance){				// So the computer can keep track which map henry is on
-			makeInBound(mapFirst);		//		and make henry inBound in that map.
-		}else if (henry.get_loc() == location.challengeOne){
-			makeInBound(mapSecond);
+			makeInBound(entrance);		//		and make henry inBound in that map.
+		}else if (henry.get_loc() == location.zim){
+			makeInBound(zim);
 		}else if (henry.get_loc() == location.hallway){
 			makeInBound(hallway);
 		}
@@ -96,9 +95,9 @@ public class vhat extends BasicGame{
 	// Renders things to the screen based on the variables that were modified in the update method
 	public void render(GameContainer gc, Graphics g) throws SlickException { 
 		if (henry.get_loc() == location.entrance){				// Determines which map to render based on location
-			mapFirst.render(0, 0);		//	(which map henry is on)
-		}else if (henry.get_loc() == location.challengeOne){
-			mapSecond.render(0, 0);
+			entrance.render(0, 0);		//	(which map henry is on)
+		}else if (henry.get_loc() == location.zim){
+			zim.render(0, 0);
 		}else if (henry.get_loc() == location.hallway){
 			hallway.render(0, 0);
 		}
