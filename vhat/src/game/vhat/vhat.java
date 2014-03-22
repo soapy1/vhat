@@ -41,6 +41,7 @@ public class vhat extends BasicGame{
 	
 	// Initializes everything needed
 	public void init(GameContainer gc) throws SlickException {
+			
 		f = new TrueTypeFont(new Font("", java.awt.Font.PLAIN, 14), true);			// Creates a font object
 		
 		gc.setShowFPS(false);
@@ -74,9 +75,6 @@ public class vhat extends BasicGame{
 		}else if (henry.get_loc() == location.hallway){
 			makeInBound(hallway);
 		}
-		
-		// TODO: use event handlers to make this more efficient
-		//changeLocation();		// Changes the location of henry if he is at a changing point
 		
 		// Determines the new position on henry depending on the arrow key that is pressed
 		// Keep in mind that the map is the thing that is actually moving - henry is always stationary
@@ -144,18 +142,12 @@ public class vhat extends BasicGame{
 		int left = (int)henry.get_x()+4;						//| hit box
 		int right = (int)henry.get_x()+henry.get_width()-4;		//|
 		
-		// TODO: STARTING FROM HERE: testing stuff
-		//System.out.println("objectName " + map.getObjectName(0, 0) );
-		//System.out.println("X: " + map.getObjectX(0, 0) + " Y: " + map.getObjectY(0, 0));
-		//System.out.println("width: " + map.getObjectWidth(0, 0) + " height: " + map.getObjectHeight(0, 0));
+		if (left>=map.getForwardX() && right<=map.getForwardX()+64 && top>=map.getForwardY() && bottom<=map.getForwardY()+32){
+			updateLocationOne();
+		}
 		
-		if (left>=map.getExitX() && right<=map.getExitX()+64 && top>=map.getExitY() && bottom<=map.getExitY()+32){
-			henry.set_loc(location.hallway);										// Moves onto next location
-			henry.new_x(mapSecond.get_xSpawn());
-			henry.new_y(mapSecond.get_ySpawn());
-	 	
-			girl.set_words_bulk("Congratulations!", "you made it to the second location", "");
-			updateGirlSpeak();
+		if (left>=map.getBackwardX() && right<=map.getBackwardX()+64 && top>=map.getBackwardY() && bottom<=map.getBackwardY()+32){
+			updateLocationTwo();
 		}
 		
 		if (henry.get_loc() == location.hallway){
@@ -186,40 +178,16 @@ public class vhat extends BasicGame{
 		}
 	}
 	
-	public void updateLocation(mapManager m, int dir) throws SlickException{
-		location l = m.get_loc();
-		
+	// First algorithm to choose which random place to put henry
+	public void updateLocationOne() throws SlickException{
+		int r = (int)(Math.random() * 3);
+		henry.set_loc(location.values()[r]);
 	}
 	
-	/*
-	 * Changes the map that is displayed 
-	 * 		I know I am going to look at this tomorrow and want to throw this computer
-	 * 		out a window. 
-	 * 
-	 * 		TODO: will need to have selection for different maps
-	 */
-	public void changeLocation() throws SlickException{
-		
-		if (henry.get_loc() == location.entrance){
-			if (henry.get_y() == (mapFirst.getHeight()*mapFirst.getTileHeight()-64) && 
-					henry.get_x() > 32*28 && henry.get_x() < 32*30){						// When henry is on a transporting spot
-				henry.set_loc(location.challengeOne);										// Moves onto next location
-				henry.new_x(mapSecond.get_xSpawn());
-				henry.new_y(mapSecond.get_ySpawn());
-		 	
-				girl.set_words_bulk("Congratulations!", "you made it to the second location", "");
-				updateGirlSpeak();
-		}
-		}else if (henry.get_loc() == location.challengeOne){
-			if (henry.get_y() == 0 && henry.get_x() > 32*2 && henry.get_x() < 32*3){
-				henry.set_loc(location.entrance);
-				henry.new_x(mapFirst.get_xSpawn());
-				henry.new_y(mapFirst.get_ySpawn());
-
-				girl.set_words_bulk("Hello Henry!", "this is the first location", "why don't you look around");
-				updateGirlSpeak();
-			}
-		}
+	// Second random algorithm to choose which random place to put henry
+	public void updateLocationTwo() throws SlickException{
+		int r = (int)(Math.random() * 3);
+		henry.set_loc(location.values()[r]);
 	}
 	
 	public static void main(String[] args) throws SlickException{

@@ -16,10 +16,10 @@ package game.vhat;
 public enum location {
 	entrance,
 	challengeOne,
+	hallway,
 	pass,
 	passForkOne,
 	passForkTwo,
-	end,
-	hallway,	// The in between 
+	end, 
 	limbo		// Not on the map
 }

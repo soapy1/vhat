@@ -15,7 +15,7 @@
   </data>
  </layer>
  <objectgroup name="Spawning" width="30" height="20">
-  <object name="enter" x="64" y="0" width="64" height="32"/>
-  <object name="exit" x="928" y="576" width="32" height="64"/>
+  <object name="backward" x="64" y="0" width="64" height="32"/>
+  <object name="forward" x="928" y="576" width="32" height="64"/>
  </objectgroup>
 </map>

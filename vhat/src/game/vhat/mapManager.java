@@ -38,12 +38,20 @@ public class mapManager extends TiledMap{
 		return ySpawn;
 	}	
 	
-	public int getExitX(){
+	public int getForwardX(){
 		return getObjectX(0, 0);
 	}
 	
-	public int getExitY(){
+	public int getForwardY(){
 		return getObjectY(0,0);
+	}
+	
+	public int getBackwardX(){
+		return getObjectX(0, 1);
+	}
+	
+	public int getBackwardY(){
+		return getObjectY(0,1);
 	}
 	
 	// Resets everything and changes map to the next location

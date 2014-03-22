@@ -15,6 +15,6 @@
   </data>
  </layer>
  <objectgroup name="Spawning" width="30" height="20">
-  <object name="exit" x="896" y="608" width="64" height="32"/>
+  <object name="forward" x="896" y="608" width="64" height="32"/>
  </objectgroup>
 </map>
