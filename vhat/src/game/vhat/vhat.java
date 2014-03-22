@@ -187,12 +187,30 @@ public class vhat extends BasicGame{
 	public void updateLocationOne() throws SlickException{
 		int r = (int)(Math.random() * 4);
 		henry.set_loc(location.values()[r]);
+		putOnSpawn(henry.get_loc());
 	}
 	
 	// Second random algorithm to choose which random place to put henry
 	public void updateLocationTwo() throws SlickException{
 		int r = (int)(Math.random() * 4);
 		henry.set_loc(location.values()[r]);
+		putOnSpawn(henry.get_loc());
+	}
+	
+	public void putOnSpawn(location l) throws SlickException{
+		if (henry.get_loc() == location.entrance){				
+			henry.new_y(entrance.get_ySpawn());	
+			henry.new_x(entrance.get_xSpawn());		
+		}else if (henry.get_loc() == location.zim){
+			henry.new_y(zim.get_ySpawn());	
+			henry.new_x(zim.get_xSpawn());
+		}else if (henry.get_loc() == location.hallway){
+			henry.new_y(hallway.get_ySpawn());	
+			henry.new_x(hallway.get_xSpawn());
+		}else if (henry.get_loc() == location.wombo){
+			henry.new_y(wombo.get_ySpawn());	
+			henry.new_x(wombo.get_xSpawn());
+		}
 	}
 	
 	public static void main(String[] args) throws SlickException{
