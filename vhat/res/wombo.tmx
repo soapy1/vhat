@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="30" height="20" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="vhatBase" tilewidth="32" tileheight="32">
+  <image source="vhatBase.png" trans="ff00ff" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="2" name="vhatTilesetOne" tilewidth="32" tileheight="32">
+  <image source="vhatTilesetOne.png" trans="ff00ff" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="3" name="vhatTilesetTwo" tilewidth="32" tileheight="32">
+  <image source="vhatTilesetTwo.png" trans="ff00ff" width="128" height="64"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="30" height="20">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA92USw6AIAxEC35Q739gcWFCSFukQzVxMQlRO4+WkUBEwaiUtTnUt3zXrAngSvUt3xFc6Z0n98iaBe2OXGsWSu71fFGE5K9mlWttZq25IVxv1T1a+ogg16qvuOicEfXmn+NqHvc3nA/a7xOPuqb3vxvFHXG+f+Zyd8UbXGkvWka4nESy3R+oTnInx4pgCQAA
+  </data>
+ </layer>
+ <objectgroup name="Object Layer 1" width="30" height="20">
+  <object name="forward" x="928" y="256" width="32" height="64"/>
+  <object name="backward" x="0" y="608" width="64" height="32"/>
+ </objectgroup>
+</map>

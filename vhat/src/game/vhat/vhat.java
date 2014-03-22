@@ -24,6 +24,7 @@ public class vhat extends BasicGame{
 	mapManager entrance;				// First map
 	mapManager zim;						// Second map
 	mapManager hallway;					
+	mapManager wombo;
 	TrueTypeFont f;
 	
 	// Keeps track of all the locations that henry has been
@@ -49,6 +50,7 @@ public class vhat extends BasicGame{
 		entrance = new mapManager("res/entrance.tmx", location.entrance, 32*20,32*20-64); 		// Creates map that can be used
 		zim = new mapManager("res/zim.tmx", location.zim, 32*5,0);				//		Same as above
 		hallway = new mapManager("res/hallway.tmx", location.hallway, 32*2, 0);
+		wombo = new mapManager("res/wombo.tmx", location.wombo, 32*5, 32*7);
 		henry = new player(entrance.get_xSpawn(), entrance.get_ySpawn(), 
 				"res/henryTwoPointO.png", location.entrance);								// Creates a new "henry" object from the player class
 		
@@ -73,6 +75,8 @@ public class vhat extends BasicGame{
 			makeInBound(zim);
 		}else if (henry.get_loc() == location.hallway){
 			makeInBound(hallway);
+		}else if (henry.get_loc() == location.wombo){
+			makeInBound(wombo);
 		}
 		
 		// Determines the new position on henry depending on the arrow key that is pressed
@@ -100,6 +104,8 @@ public class vhat extends BasicGame{
 			zim.render(0, 0);
 		}else if (henry.get_loc() == location.hallway){
 			hallway.render(0, 0);
+		}else if (henry.get_loc() == location.wombo){
+			wombo.render(0, 0);
 		}
 		
 		henry.draw(henry.get_x(),henry.get_y(), (float)1);		// Draws henry at his x and y position		
@@ -179,13 +185,13 @@ public class vhat extends BasicGame{
 	
 	// First algorithm to choose which random place to put henry
 	public void updateLocationOne() throws SlickException{
-		int r = (int)(Math.random() * 3);
+		int r = (int)(Math.random() * 4);
 		henry.set_loc(location.values()[r]);
 	}
 	
 	// Second random algorithm to choose which random place to put henry
 	public void updateLocationTwo() throws SlickException{
-		int r = (int)(Math.random() * 3);
+		int r = (int)(Math.random() * 4);
 		henry.set_loc(location.values()[r]);
 	}
 	
