@@ -23,6 +23,7 @@ public class vhat extends BasicGame{
 	TextField girlTipThree;
 	mapManager mapFirst;				// First map
 	mapManager mapSecond;				// Second map
+	mapManager hallway;					
 	TrueTypeFont f;
 	
 	// Keeps track of all the locations that henry has been
@@ -44,9 +45,9 @@ public class vhat extends BasicGame{
 		gc.setShowFPS(false);
 		
 		// mapFirst is 30x20 tiles (tiles are 32x32 pixels)
-		mapFirst = new mapManager("res/testRmOne.tmx", 1, 32*20,32*20-64); 		// Creates map that can be used
-		mapSecond = new mapManager("res/testRmTwo.tmx", 2, 32*5,0);				//		Same as above
-	
+		mapFirst = new mapManager("res/testRmOne.tmx", location.entrance, 32*20,32*20-64); 		// Creates map that can be used
+		mapSecond = new mapManager("res/testRmTwo.tmx", location.challengeOne, 32*5,0);				//		Same as above
+		hallway = new mapManager("res/hallway.tmx", location.hallway, 32*2, 0);
 		henry = new player(mapFirst.get_xSpawn(), mapFirst.get_ySpawn(), 
 				"res/henry.png", location.entrance);								// Creates a new "henry" object from the player class
 		

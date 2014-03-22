@@ -11,23 +11,23 @@ import org.newdawn.slick.tiled.*;
 
 public class mapManager extends TiledMap{
 
-	private int loc;								// Details the map number - because I was not smart and called it location
+	private location loc;								// Details the map number - because I was not smart and called it location
 	private int xSpawn, ySpawn;						// Details the x and y spawn points of henry on the map
 	private int xExit, yExit;
-	
+
 	public mapManager(String map) throws SlickException{
 		super(map); 
 	}
 	
 	// construct
-	public mapManager(String map, int locationNum, int spawnPointX, int spawnPointY) throws SlickException{
+	public mapManager(String map, location locationNum, int spawnPointX, int spawnPointY) throws SlickException{
 		super(map);
 		loc = locationNum;
 		xSpawn = spawnPointX;
 		ySpawn = spawnPointY;	
 	}
 	
-	public int get_loc(){
+	public location get_loc(){
 		return loc;
 	}
 	

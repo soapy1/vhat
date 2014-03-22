@@ -20,5 +20,6 @@ public enum location {
 	passForkOne,
 	passForkTwo,
 	end,
-	limbo
+	hallway,	// The in between 
+	limbo		// Not on the map
 }
