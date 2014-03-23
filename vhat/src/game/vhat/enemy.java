@@ -71,9 +71,8 @@ public class enemy extends player{
 		int bottom = (int)get_y()+get_height()+24;		//| Defines henry's 
 		int left = (int)get_x()+4;						//| hit box
 		int right = (int)get_x()+get_width()-4;		//|
-				
-		int t = map.getTileId(((int)((left+right)/2)/32),(int)(((top+bottom)/2)/32), 0);	// Tiled id at center of hit box
 		try{
+			int t = map.getTileId(((int)((left+right)/2)/32),(int)(((top+bottom)/2)/32), 0);	// Tiled id at center of hit box
 			if (t >= 3 && t <= 10){		// If the center of the hit box has a tile id that corresponds to a wall tile, adjust
 				if (map.getTileId(((int)((left+right)/2)/32), (int)(top/32), 0) <= 2 ||				// Top tile is not wall
 						map.getTileId(((int)((left+right)/2)/32), (int)(top/32), 0) >= 11){

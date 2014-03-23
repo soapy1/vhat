@@ -20,6 +20,7 @@ public class vhat extends BasicGame{
 	girl girl;							// Makes henry's companion
 	enemy nimb;
 	enemy bimb;
+	enemy bob;
 	TextField girlTipOne;				// This is where the user will be able to hear what henry's companion has to say
 	TextField girlTipTwo;				//		There are three because a text field does not support multi-line text
 	TextField girlTipThree;
@@ -30,7 +31,6 @@ public class vhat extends BasicGame{
 	static mapManager end;
 	TrueTypeFont f;
 	
-
 	int numChangesOne = 1;
 	int numChangesTwo = 1;
 	
@@ -63,6 +63,8 @@ public class vhat extends BasicGame{
 		nimb.choosedir();
 		bimb = new enemy(25*32,7*32,"res/henry.png", location.entrance);
 		bimb.choosedir();
+		bob = new enemy(0*32,18*32,"res/henry.png", location.entrance);
+		bob.choosedir();
 		
 		girl = new girl(0,0,"res/ninja.png");										// Makes henry's companion
 		girlTipOne = new TextField(gc, f, girl.get_width(), 640, 500, 20);			// Allows for output from henry's companion
@@ -79,29 +81,38 @@ public class vhat extends BasicGame{
 	public void update(GameContainer gc, int delta) throws SlickException {
 		Input input = gc.getInput();	// Creates an input object
 		
-		if (henry.hitenemy(nimb) || henry.hitenemy(bimb)){
-			System.out.println("DEAD");
+		if (henry.hitenemy(nimb) || henry.hitenemy(bimb) || henry.hitenemy(bob)){
+			//System.out.println("DEAD");
+			henry.set_loc(location.end);
+			girl.clear_words();
+			girl.set_words_index("Henry, you died :(",  0);
+			girl.set_words_index("That means you loose",  1);
 		}
 		
 		nimb.moveon();
 		bimb.moveon();
+		bob.moveon();
 		
 		if (henry.get_loc() == location.entrance){				// So the computer can keep track which map henry is on
 			henry.makeInBound(entrance);		//		and make henry inBound in that map.
 			nimb.makeInBound(entrance);
 			bimb.makeInBound(entrance);
+			bob.makeInBound(entrance);
 		}else if (henry.get_loc() == location.zim){
 			henry.makeInBound(zim);
 			nimb.makeInBound(zim);
 			bimb.makeInBound(zim);
+			bob.makeInBound(zim);
 		}else if (henry.get_loc() == location.hallway){
 			henry.makeInBound(hallway);
 			nimb.makeInBound(hallway);
 			bimb.makeInBound(hallway);
+			bob.makeInBound(hallway);
 		}else if (henry.get_loc() == location.wombo){
 			henry.makeInBound(wombo);
 			nimb.makeInBound(wombo);
 			bimb.makeInBound(wombo);
+			bob.makeInBound(wombo);
 		}else if (henry.get_loc() == location.end){
 			henry.makeInBound(end);
 		}
@@ -129,23 +140,39 @@ public class vhat extends BasicGame{
 	// Renders things to the screen based on the variables that were modified in the update method
 	public void render(GameContainer gc, Graphics g) throws SlickException { 
 		if (henry.get_loc() == location.entrance){				// Determines which map to render based on location
-			entrance.render(0, 0);		//	(which map henry is on)
+			entrance.render(0, 0);		//	(which map henry is on)4nimb.draw(nimb.get_x(), nimb.get_y(), (float)1);
+			nimb.draw(nimb.get_x(), nimb.get_y(), (float)1);
+			bimb.draw(bimb.get_x(), bimb.get_y(), (float)1);
+			bob.draw(bob.get_x(), bob.get_y(), (float)1);
+			g.setColor(Color.red);
+			g.drawRect(nimb.get_x()-32,nimb.get_y()-32, 96, 128);
+			g.drawRect(bimb.get_x()-32,bimb.get_y()-32, 96, 128);
+			g.drawRect(bob.get_x()-32,bob.get_y()-32, 96, 128);
 		}else if (henry.get_loc() == location.zim){
 			zim.render(0, 0);
+			nimb.draw(nimb.get_x(), nimb.get_y(), (float)1);
+			bimb.draw(bimb.get_x(), bimb.get_y(), (float)1);
+			bob.draw(bob.get_x(), bob.get_y(), (float)1);
+			g.setColor(Color.red);
+			g.drawRect(nimb.get_x()-32,nimb.get_y()-32, 96, 128);
+			g.drawRect(bimb.get_x()-32,bimb.get_y()-32, 96, 128);
+			g.drawRect(bob.get_x()-32,bob.get_y()-32, 96, 128);
 		}else if (henry.get_loc() == location.hallway){
 			hallway.render(0, 0);
 		}else if (henry.get_loc() == location.wombo){
 			wombo.render(0, 0);
+			nimb.draw(nimb.get_x(), nimb.get_y(), (float)1);
+			bimb.draw(bimb.get_x(), bimb.get_y(), (float)1);
+			bob.draw(bob.get_x(), bob.get_y(), (float)1);
+			g.setColor(Color.red);
+			g.drawRect(nimb.get_x()-32,nimb.get_y()-32, 96, 128);
+			g.drawRect(bimb.get_x()-32,bimb.get_y()-32, 96, 128);
+			g.drawRect(bob.get_x()-32,bob.get_y()-32, 96, 128);
 		}else if (henry.get_loc() == location.end){
 			end.render(0, 0);
 		}
 		
 		henry.draw(henry.get_x(),henry.get_y(), (float)1);		// Draws henry at his x and y position		
-		nimb.draw(nimb.get_x(), nimb.get_y(), (float)1);
-		bimb.draw(bimb.get_x(), bimb.get_y(), (float)1);
-		g.setColor(Color.red);
-		g.drawRect(nimb.get_x()-32,nimb.get_y()-32, 96, 128);
-		g.drawRect(bimb.get_x()-32,bimb.get_y()-32, 96, 128);
 		girl.draw(0,screen_height-girl.get_height(),1);			// Draws henry's companion
 		g.setColor(Color.white);
 		girlTipOne.render(gc, g);								// Draws what the companion has to say

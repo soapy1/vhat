@@ -183,15 +183,12 @@ public class player {
 				re = Math.random()*4;
 			}
 			int r = (int)re;
-			System.out.println("re: " + re + " n: " + n);
-			System.out.println("numChangesOne: " + numChangesOne + " r: " + r);
 			set_loc(location.values()[r]);
 			putOnSpawn(get_loc());
 		}
 		
 		// Second random algorithm to choose which random place to put henry
 		public void updateLocationTwo() throws SlickException{
-			System.out.println("One: " + numChangesOne + " Two: " + numChangesTwo);
 			if (numChangesTwo%2 == 1 && (numChangesTwo+numChangesOne)%2 == 0){
 				set_loc(location.end);
 				putOnSpawn(get_loc());
