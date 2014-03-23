@@ -10,8 +10,12 @@ public class player {
 	
 	private float x, y;
 	private Image img;
+	private SpriteSheet sprite;
 	private location location;
 	private String items [] = new String [3];
+	private int height, width;
+	
+	private int u=0, d=0, l=0, r=0;
 
 	// construct
 	public player(float xPos, float yPos, String image, location loc) throws SlickException{
@@ -19,6 +23,17 @@ public class player {
 		y = yPos;
 		img = new Image(image);				// Creates an image of the player that will be used in the main class 
 		location = loc;						// The location/map that henry is currently on	
+		height = img.getHeight();
+		width = img.getWidth();
+	}
+	
+	public player(float xPos, float yPos, String image, int sx, int sy, location loc) throws SlickException{
+		x = xPos;
+		y = yPos;
+		sprite = new SpriteSheet(image, sx, sy);				 
+		location = loc;	
+		height = sy;
+		width = sx;
 	}
 	
 	/*
@@ -32,12 +47,17 @@ public class player {
 		img.draw(x,y,scale);				
 	}
 	
+	
+	public void draw(int sx, int sy, float x, float y, float scale) throws SlickException{
+		sprite.getSprite(sx, sy).draw(x,y,scale);				
+	}
+	
 	public int get_height() throws SlickException{
-		return img.getHeight();
+		return height;
 	}
 	
 	public int get_width() throws SlickException{
-		return img.getWidth();
+		return width;
 	}
 	
 	// Returns the x coordinate of henry

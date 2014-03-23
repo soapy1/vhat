@@ -84,6 +84,7 @@ public class vhat extends BasicGame{
 			makeInBound(end);
 		}
 		
+		
 		// Determines the new position on henry depending on the arrow key that is pressed
 		// Keep in mind that the map is the thing that is actually moving - henry is always stationary
 		if (input.isKeyDown(Input.KEY_UP)){				
@@ -99,6 +100,8 @@ public class vhat extends BasicGame{
 		if (input.isKeyPressed(Input.KEY_A)){
 			henry.interact(girl);	
 		}
+		
+		updateGirlSpeak();
 	}
 
 	// Renders things to the screen based on the variables that were modified in the update method
