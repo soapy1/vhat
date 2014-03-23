@@ -208,11 +208,14 @@ public class vhat extends BasicGame{
 	
 	// Second random algorithm to choose which random place to put henry
 	public void updateLocationTwo() throws SlickException{
-		double n = (numChangesOne+10)/100;
-		int r = (int)(Math.cos(n)/Math.log(n));
-		System.out.println(r);
-		henry.set_loc(location.values()[r]);
-		putOnSpawn(henry.get_loc());
+		System.out.println("One: " + numChangesOne + " Two: " + numChangesTwo);
+		if (numChangesTwo%2 == 1 && (numChangesTwo+numChangesOne)%2 == 0){
+			henry.set_loc(location.end);
+			putOnSpawn(henry.get_loc());
+		}else{
+			henry.set_loc(location.values()[(int)(Math.random()*4)]);
+			putOnSpawn(henry.get_loc());
+		}
 	}
 	
 	public void putOnSpawn(location l) throws SlickException{
