@@ -24,6 +24,7 @@ public class vhat extends BasicGame{
 	TextField girlTipOne;				// This is where the user will be able to hear what henry's companion has to say
 	TextField girlTipTwo;				//		There are three because a text field does not support multi-line text
 	TextField girlTipThree;
+	Music mad;
 	static mapManager entrance;				// First map
 	static mapManager zim;						// Second map
 	static mapManager hallway;					
@@ -45,7 +46,6 @@ public class vhat extends BasicGame{
 	
 	// Initializes everything needed
 	public void init(GameContainer gc) throws SlickException {
-			
 		f = new TrueTypeFont(new Font("", java.awt.Font.PLAIN, 14), true);			// Creates a font object
 		
 		gc.setShowFPS(false);
