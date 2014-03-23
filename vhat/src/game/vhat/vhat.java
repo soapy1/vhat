@@ -28,8 +28,9 @@ public class vhat extends BasicGame{
 	mapManager end;
 	TrueTypeFont f;
 	
-	// Keeps track of all the locations that henry has been
-	boolean checkPoints[] = {true, false, false, false};
+
+	int numChangesOne = 1;
+	int numChangesTwo = 1;
 	
 	int speed = 1;						// How many pixels henry moves 
 	static int screen_width = 960;	
@@ -50,7 +51,7 @@ public class vhat extends BasicGame{
 		// mapFirst is 30x20 tiles (tiles are 32x32 pixels)
 		entrance = new mapManager("res/entrance.tmx", location.entrance, 32*20,32*20-64); 		// Creates map that can be used
 		zim = new mapManager("res/zim.tmx", location.zim, 32*5,0);				//		Same as above
-		hallway = new mapManager("res/hallway.tmx", location.hallway, 32*2, 0);
+		hallway = new mapManager("res/hallway.tmx", location.hallway, 32*2, 32*2);
 		wombo = new mapManager("res/wombo.tmx", location.wombo, 32*5, 32*7);
 		end = new mapManager("res/end.tmx", location.end, 32*15, 32*10);
 		henry = new player(entrance.get_xSpawn(), entrance.get_ySpawn(), 
@@ -155,10 +156,12 @@ public class vhat extends BasicGame{
 		
 		if (left>=map.getForwardX() && right<=map.getForwardX()+64 && top>=map.getForwardY() && bottom<=map.getForwardY()+32){
 			updateLocationOne();
+			numChangesOne += 1;
 		}
 		
 		if (left>=map.getBackwardX() && right<=map.getBackwardX()+64 && top>=map.getBackwardY() && bottom<=map.getBackwardY()+32){
 			updateLocationTwo();
+			numChangesTwo += 1;
 		}
 		
 		if (henry.get_loc() == location.hallway){
@@ -191,14 +194,23 @@ public class vhat extends BasicGame{
 	
 	// First algorithm to choose which random place to put henry
 	public void updateLocationOne() throws SlickException{
-		int r = (int)(Math.random() * 4);
+		double n = (numChangesOne+numChangesTwo+(Math.random()*50+50))/100.0;
+		double re = Math.abs((Math.cos(n)/Math.log(n)));
+		if (re > 4){
+			re = Math.random()*4;
+		}
+		int r = (int)re;
+		System.out.println("re: " + re + " n: " + n);
+		System.out.println("numChangesOne: " + numChangesOne + " r: " + r);
 		henry.set_loc(location.values()[r]);
 		putOnSpawn(henry.get_loc());
 	}
 	
 	// Second random algorithm to choose which random place to put henry
 	public void updateLocationTwo() throws SlickException{
-		int r = (int)(Math.random() * 4);
+		double n = (numChangesOne+10)/100;
+		int r = (int)(Math.cos(n)/Math.log(n));
+		System.out.println(r);
 		henry.set_loc(location.values()[r]);
 		putOnSpawn(henry.get_loc());
 	}
