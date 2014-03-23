@@ -219,6 +219,24 @@ public class player {
 				new_x(vhat.end.get_xSpawn());
 			}
 		}
+		
+		public boolean hitenemy(enemy en) throws SlickException{
+			int top = (int)get_y();						//|
+			int bottom = (int)get_y()+get_height();			//| Defines henry's 
+			int left = (int)get_x();						//| hit box
+			int right = (int)get_x()+get_width();			//|
+			
+			int entop = (int)en.get_y()-32;							//|
+			int enbottom = (int)en.get_y()+get_height()+96;			//| Defines enemy's 
+			int enleft = (int)en.get_x()-64;						//| hit box
+			int enright = (int)en.get_x()+get_width()+96;			//|
+			
+			if (top>entop && bottom<enbottom && left>enleft && right<enright){
+				return true;
+			}
+			
+			return false;
+		}
 	
 }
 
