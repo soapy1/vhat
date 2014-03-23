@@ -18,14 +18,15 @@ public class vhat extends BasicGame{
 	
 	player henry;						// Reference the player class to create a "henry" player object
 	girl girl;							// Makes henry's companion
+	enemy nimb;
 	TextField girlTipOne;				// This is where the user will be able to hear what henry's companion has to say
 	TextField girlTipTwo;				//		There are three because a text field does not support multi-line text
 	TextField girlTipThree;
-	mapManager entrance;				// First map
-	mapManager zim;						// Second map
-	mapManager hallway;					
-	mapManager wombo;
-	mapManager end;
+	static mapManager entrance;				// First map
+	static mapManager zim;						// Second map
+	static mapManager hallway;					
+	static mapManager wombo;
+	static mapManager end;
 	TrueTypeFont f;
 	
 
@@ -57,6 +58,8 @@ public class vhat extends BasicGame{
 		henry = new player(entrance.get_xSpawn(), entrance.get_ySpawn(), 
 				"res/henryTwoPointO.png", location.entrance);								// Creates a new "henry" object from the player class
 		
+		nimb = new enemy(0,0,"res/henry.png", location.entrance);
+		
 		girl = new girl(0,0,"res/ninja.png");										// Makes henry's companion
 		girlTipOne = new TextField(gc, f, girl.get_width(), 640, 500, 20);			// Allows for output from henry's companion
 		girlTipOne.setAcceptingInput(false);										// So the user can't input anything
@@ -73,15 +76,15 @@ public class vhat extends BasicGame{
 		Input input = gc.getInput();	// Creates an input object
 		
 		if (henry.get_loc() == location.entrance){				// So the computer can keep track which map henry is on
-			makeInBound(entrance);		//		and make henry inBound in that map.
+			henry.makeInBound(entrance);		//		and make henry inBound in that map.
 		}else if (henry.get_loc() == location.zim){
-			makeInBound(zim);
+			henry.makeInBound(zim);
 		}else if (henry.get_loc() == location.hallway){
-			makeInBound(hallway);
+			henry.makeInBound(hallway);
 		}else if (henry.get_loc() == location.wombo){
-			makeInBound(wombo);
+			henry.makeInBound(wombo);
 		}else if (henry.get_loc() == location.end){
-			makeInBound(end);
+			henry.makeInBound(end);
 		}
 		
 		
@@ -119,6 +122,7 @@ public class vhat extends BasicGame{
 		}
 		
 		henry.draw(henry.get_x(),henry.get_y(), (float)1);		// Draws henry at his x and y position		
+		nimb.draw(nimb.get_x(), nimb.get_y(), (float)1);
 		girl.draw(0,screen_height-girl.get_height(),1);			// Draws henry's companion
 		girlTipOne.render(gc, g);								// Draws what the companion has to say
 		girlTipTwo.render(gc, g);
@@ -132,112 +136,6 @@ public class vhat extends BasicGame{
 		girlTipOne.setText(girl.get_words(0));
 		girlTipTwo.setText(girl.get_words(1));
 		girlTipThree.setText(girl.get_words(2));
-	}
-	
-	/* 
-	 * Makes sure that henry is in bounds.  If henry is not in bounds, he is moved back.
-	 * This method includes keeping henry on the screen and making sure he stays on the path.
-	 */ 
-	public void makeInBound(mapManager map) throws SlickException{
-		//changeLocation();
-		      
-		// For keeping henry in the screen
-		if (henry.get_y() < 0){												// Upper boundary
-			henry.ch_y(speed);}
-		if (henry.get_y() > (map.getHeight()*map.getTileHeight() - 32)){	// Lower boundary
-			henry.ch_y(-speed);}
-		if (henry.get_x() < 0){												// Left-most boundary
-			henry.ch_x(speed);}
-		if (henry.get_x() > (map.getWidth()*map.getTileWidth() - 32)){		// Right-most boundary
-			henry.ch_x(-speed);}
-		
-		// Stupid thing for keeping henry in the path 
-		int top = (int)henry.get_y()+24;						//|
-		int bottom = (int)henry.get_y()+henry.get_height();		//| Defines henry's 
-		int left = (int)henry.get_x()+4;						//| hit box
-		int right = (int)henry.get_x()+henry.get_width()-4;		//|
-		
-		if (left>=map.getForwardX() && right<=map.getForwardX()+64 && top>=map.getForwardY() && bottom<=map.getForwardY()+32){
-			updateLocationOne();
-			numChangesOne += 1;
-		}
-		
-		if (left>=map.getBackwardX() && right<=map.getBackwardX()+64 && top>=map.getBackwardY() && bottom<=map.getBackwardY()+32){
-			updateLocationTwo();
-			numChangesTwo += 1;
-		}
-		
-		if (henry.get_loc() == location.hallway){
-			return;
-		}
-		
-		int t = map.getTileId(((int)((left+right)/2)/32),(int)(((top+bottom)/2)/32), 0);	// Tiled id at center of hit box
-		try{
-			if (t >= 3 && t <= 10){		// If the center of the hit box has a tile id that corresponds to a wall tile, adjust
-				if (map.getTileId(((int)((left+right)/2)/32), (int)(top/32), 0) <= 2 ||				// Top tile is not wall
-						map.getTileId(((int)((left+right)/2)/32), (int)(top/32), 0) >= 11){
-					henry.ch_y(-2);
-				}else if (map.getTileId(((int)((left+right)/2)/32), (int)(bottom/32), 0) <=2 ||		// Bottom tile is not a wall
-						map.getTileId(((int)((left+right)/2)/32), (int)(bottom/32), 0) >= 11){
-					henry.ch_y(2);
-				}else if (map.getTileId((int)(left/32), (int)((top+bottom)/2)/32, 0) <= 2 ||		// Leftmost tile " " " "
-						map.getTileId((int)(left/32), (int)((top+bottom)/2)/32, 0) >= 11){
-					henry.ch_x(-2);
-				}else if (map.getTileId((int)(right/32), (int)((top+bottom)/2)/32, 0) <= 2 ||		// Rightmost tile " " " "
-						map.getTileId((int)(right/32), (int)((top+bottom)/2)/32, 0) >= 11){
-					henry.ch_x(2);
-				}
-			}
-		}catch (ArrayIndexOutOfBoundsException e){				// So that it does not goof up
-			e.printStackTrace();
-		}catch (IndexOutOfBoundsException e){
-			e.printStackTrace();
-		}
-	}
-	
-	// First algorithm to choose which random place to put henry
-	public void updateLocationOne() throws SlickException{
-		double n = (numChangesOne+numChangesTwo+(Math.random()*50+50))/100.0;
-		double re = Math.abs((Math.cos(n)/Math.log(n)));
-		if (re > 4){
-			re = Math.random()*4;
-		}
-		int r = (int)re;
-		System.out.println("re: " + re + " n: " + n);
-		System.out.println("numChangesOne: " + numChangesOne + " r: " + r);
-		henry.set_loc(location.values()[r]);
-		putOnSpawn(henry.get_loc());
-	}
-	
-	// Second random algorithm to choose which random place to put henry
-	public void updateLocationTwo() throws SlickException{
-		System.out.println("One: " + numChangesOne + " Two: " + numChangesTwo);
-		if (numChangesTwo%2 == 1 && (numChangesTwo+numChangesOne)%2 == 0){
-			henry.set_loc(location.end);
-			putOnSpawn(henry.get_loc());
-		}else{
-			henry.set_loc(location.values()[(int)(Math.random()*4)]);
-			putOnSpawn(henry.get_loc());
-		}
-	}
-	
-	public void putOnSpawn(location l) throws SlickException{
-		if (henry.get_loc() == location.entrance){				
-			henry.new_y(entrance.get_ySpawn());	
-			henry.new_x(entrance.get_xSpawn());		
-		}else if (henry.get_loc() == location.zim){
-			henry.new_y(zim.get_ySpawn());	
-			henry.new_x(zim.get_xSpawn());
-		}else if (henry.get_loc() == location.hallway){
-			henry.new_y(hallway.get_ySpawn());	
-			henry.new_x(hallway.get_xSpawn());
-		}else if (henry.get_loc() == location.wombo){
-			henry.new_y(wombo.get_ySpawn());	
-			henry.new_x(wombo.get_xSpawn());
-		}else if (henry.get_loc() == location.end){
-			henry.new_y(end.get_ySpawn());	
-			henry.new_x(end.get_xSpawn());
-		}
 	}
 	
 	public static void main(String[] args) throws SlickException{
